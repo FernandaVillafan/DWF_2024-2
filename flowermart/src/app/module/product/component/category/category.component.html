@@ -1,0 +1,31 @@
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Categorías</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-info">
+                        <th scope="row">Category Table</th>
+                        <td class="categories">category_id</td>
+                        <td class="categories">acronym</td>
+                        <td class="categories">category</td>
+                        <td class="categories">status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (category of categories; track category; let i=$index){
+                        <tr>
+                            <th scope="row">Item {{i+1}}</th>
+                            <td>{{ category.category_id }}</td>
+                            <td>{{ category.acronym }}</td>
+                            <td>{{ category.category }}</td>
+                            <td>{{ category.status }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </body>
