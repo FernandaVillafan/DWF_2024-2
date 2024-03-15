@@ -4,6 +4,7 @@ import { Category } from '../_model/category/category';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoryService {
 
   constructor() { }

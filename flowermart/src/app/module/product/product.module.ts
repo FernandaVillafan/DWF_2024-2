@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from './component/category/category.component';
 
-
-
 @NgModule({
   declarations: [
     CategoryComponent
@@ -12,4 +10,5 @@ import { CategoryComponent } from './component/category/category.component';
     CommonModule
   ]
 })
+
 export class ProductModule { }
