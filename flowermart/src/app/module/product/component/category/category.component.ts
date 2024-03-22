@@ -2,43 +2,76 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category/category';
+import Swal from'sweetalert2';
+
+declare var $: any; // JQuery
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit {
-  form: FormGroup;
-  categories: Category[] = [];
-  submitted = false; // Añadir una variable para rastrear si el formulario ha sido enviado
 
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) {
-    this.form = this.formBuilder.group({
-      category: ['', Validators.required],
-      acronym: ['', Validators.required]
+export class CategoryComponent {
+
+  categories: Category[] = []; // Category List
+
+  // Category form
+  form = this.formBuilder.group({
+    category: ["", [Validators.required]],
+    acronym: ["", [Validators.required]],
+  });
+
+  submitted = false; // Form submitted
+
+  constructor(
+    private categoryService: CategoryService,
+    private formBuilder: FormBuilder,
+  ){}
+
+  ngOnInit() {
+    this.getCategories();
+  }
+
+  onSubmit() {
+    // validate form
+    this.submitted = true;
+    if(this.form.invalid) return;
+    this.submitted = false;
+
+    // add category to category list
+    let id = this.categories.length + 1;
+    let category = new Category(id, this.form.controls['category'].value!, this.form.controls['acronym'].value!, 1);
+    this.categories.push(category);
+
+    // close modal
+    this.hideModalForm();
+
+    // show message
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      iconColor: 'white',
+      title: 'La categoría ha sido agregada',
+      color: 'white',
+      background: '#669dc1',
+      showConfirmButton: false,
+      timer: 3000
     });
   }
 
-  ngOnInit(): void {
+  getCategories() {
     this.categories = this.categoryService.getCategories();
   }
 
-  onSubmit(): void {
-    this.submitted = true; // Marcar el formulario como enviado para mostrar errores si es necesario
-    if (this.form.valid) {
-      const newCategory: Category = {
-        category_id: this.categories.length + 1, // O alguna otra lógica para generar el ID
-        category: this.form.value.category,
-        acronym: this.form.value.acronym,
-        status: 1 // Suponiendo que 1 representa una categoría activa
-      };
-      this.categories.push(newCategory);
-      // Mostrar mensaje de confirmación
-      alert('Categoría agregada con éxito'); // Considera usar una librería de alertas para un mejor UI
-      this.form.reset();
-      this.submitted = false; // Resetear el estado de enviado
-    }
+  showModalForm() {
+    $("#modalForm").modal("show");
+    this.form.reset();
+    this.submitted = false;
   }
 
+  hideModalForm() {
+    $("#modalForm").modal("hide");
+    this.form.reset();
+  }
 }

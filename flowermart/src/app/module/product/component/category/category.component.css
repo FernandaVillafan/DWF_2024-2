@@ -27,6 +27,10 @@ th, .td-open, .td-close {
     font-weight: bold;
 }
 
+.input-error-message{
+    color: #CA2A4A
+}
+
 .td-close:hover {
     color: orangered;
     font-weight: bold;
@@ -36,4 +40,3 @@ th, .td-open, .td-close {
     color: lightgreen;
     font-weight: bold;
 }
-
