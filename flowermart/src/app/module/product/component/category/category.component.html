@@ -9,23 +9,76 @@
                     <tr class="table-info">
                         <th scope="row">Category Table</th>
                         <td class="categories">category_id</td>
-                        <td class="categories">acronym</td>
                         <td class="categories">category</td>
+                        <td class="categories">acronym</td>
                         <td class="categories">status</td>
                     </tr>
                 </thead>
                 <tbody>
                     @for (category of categories; track category; let i=$index){
-                        <tr>
-                            <th scope="row">Item {{i+1}}</th>
-                            <td>{{ category.category_id }}</td>
-                            <td>{{ category.acronym }}</td>
-                            <td>{{ category.category }}</td>
-                            <td>{{ category.status }}</td>
-                        </tr>
+                    <tr>
+                        <th scope="row">Item {{i+1}}</th>
+                        <td>{{ category.category_id }}</td>
+                        <td>{{ category.category }}</td>
+                        <td>{{ category.acronym }}</td>
+                        <td>{{ category.status }}</td>
+                    </tr>
                     }
                 </tbody>
             </table>
+        </div>
+
+        <!-- Botón para abrir el modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm" (click) = "showModalForm()">
+            Nueva Categoría
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true"
+            data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="categoryModalLabel">Nueva Categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Contenido del modal, por ejemplo, un formulario para añadir una nueva categoría -->
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            
+                            <!-- Category  -->
+            
+                            <div class="mb-3">
+                              <label for="category" class="form-label">Categoría</label>
+                              <input type="text" class="form-control" formControlName="category" placeholder="Nombre de la categoría"
+                                [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
+            
+                              @if (form.controls['category'].errors && submitted) {
+                                <small class="input-error-message">Por favor ingresa un nombre de categoría</small>
+                              }
+                            </div>
+
+                            <!-- Acronym  -->
+            
+                            <div class="mb-3">
+                                <label for="acronym" class="form-label">Acrónimo</label>
+                                <input type="text" class="form-control" formControlName="acronym" placeholder="Acrónimo de la categoría"
+                                  [ngClass]="{'is-invalid': form.controls['acronym'].errors && submitted}">
+              
+                                @if (form.controls['acronym'].errors && submitted) {
+                                  <small class="input-error-message">Por favor ingresa un acrónimo de categoría</small>
+                                }
+                            </div>
+            
+                            <!-- Button  -->
+            
+                            <div class="form-button">
+                                <button type="submit" class="btn btn-primary btn-new">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
