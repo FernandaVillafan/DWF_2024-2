@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductModule } from './module/product/product.module';
+import { AuthenticationModule } from './module/authentication/authentication.module';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { jwtInterceptorInterceptor } from './core/interceptor/jwt-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,12 @@ import { ProductModule } from './module/product/product.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProductModule
+    ProductModule,
+    AuthenticationModule,
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([jwtInterceptorInterceptor]))
+  ],
   bootstrap: [AppComponent]
 })
 

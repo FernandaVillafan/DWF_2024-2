@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category/category';
 import Swal from'sweetalert2';
@@ -40,28 +40,69 @@ export class CategoryComponent {
     this.submitted = false;
 
     // add category to category list
-    let id = this.categories.length + 1;
-    let category = new Category(id, this.form.controls['category'].value!, this.form.controls['acronym'].value!, 1);
-    this.categories.push(category);
+    this.categoryService.createCategory(this.form.value).subscribe({
+      next: (v) => {
+        // show message
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          toast: true,
+          text: v.body!.message,
+          background: '#E8F8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
 
-    // close modal
-    this.hideModalForm();
+        // reload categories
+        this.getCategories();
 
-    // show message
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      iconColor: 'white',
-      title: 'La categoría ha sido agregada',
-      color: 'white',
-      background: '#669dc1',
-      showConfirmButton: false,
-      timer: 3000
+        // close modal
+        this.hideModalForm();
+      },
+      error: (e) => {
+        console.error(e);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          toast: true,
+          text: e.error!.message,
+          background: '#F8E8F8',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
     });
   }
 
   getCategories() {
-    this.categories = this.categoryService.getCategories();
+    this.categoryService.getCategories().subscribe({
+      next: (v) => this.categories = v.body!,
+      error: (e) => console.error(e)
+    });
+  }
+
+  createCategory() {
+
+  }
+
+  getCategory() {
+
+  }
+
+  updateCategory() {
+
+  }
+
+  deleteCategory() {
+
+  }
+
+  activeCategory() {
+
+  }
+
+  getActiveCategories() {
+    
   }
 
   showModalForm() {
@@ -72,6 +113,5 @@ export class CategoryComponent {
 
   hideModalForm() {
     $("#modalForm").modal("hide");
-    this.form.reset();
   }
 }
