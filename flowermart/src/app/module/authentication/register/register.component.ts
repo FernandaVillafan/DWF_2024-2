@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { urlApiRegistroUsuario } from '../_helper/urls';
 import { faBuilding, faEnvelope, faUser }  from '@fortawesome/free-solid-svg-icons';
 import { faGlobe, faKey, faLocationArrow, faUserPlus, faUserSecret } from '@fortawesome/free-solid-svg-icons';
-
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -15,10 +14,8 @@ import { Router } from '@angular/router';
 })
 
 export class RegisterComponent {
-
   urlRegistro : string = urlApiRegistroUsuario;
   usuario: Usuario = new Usuario();
-
   userIcon = faUser;
   surnameIcon = faUserPlus;
   addressIcon = faLocationArrow;
@@ -28,7 +25,7 @@ export class RegisterComponent {
   regionIcon = faGlobe;
   rfcIcon = faBuilding;
 
-  constructor(private http : HttpClient, private router: Router){ }
+  constructor(private http : HttpClient, private router: Router) { }
 
   onSubmit() {
 
@@ -41,15 +38,17 @@ export class RegisterComponent {
           title: 'Usuario registrado',
           text: 'Usuario Registrado exitosamente',
           icon: 'success',
-          showConfirmButton: true,  
+          showConfirmButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
             this.router.navigate(['/login']);
           }     
         })
-      }, (error) => {
+      },
+      (error) => {
         console.log('Error en llamada a la API de registro');
-      }, () => {
+      },
+      () => {
         console.log('Bloque de codigo que se ejecuta siempre. Sin importar si se ejecuto con exito o con error');
       }
     )

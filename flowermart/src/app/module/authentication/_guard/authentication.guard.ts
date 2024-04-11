@@ -4,10 +4,10 @@ import { AuthenticationService } from '../_service/authentication.service';
 
 export const authenticationGuard: CanActivateFn = (route, state) => {
 
-  let estaLoggeado : boolean = inject(AuthenticationService).isUserLoggedIn();
-  console.log(estaLoggeado);
+  let isLogged : boolean = inject(AuthenticationService).isUserLoggedIn();
+  console.log(isLogged);
 
-  if (!estaLoggeado) {
+  if (!isLogged) {
     console.log('Redirigiendo a inicio de sesion');
     inject(Router).navigate(['login']);
     return false;

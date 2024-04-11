@@ -5,6 +5,8 @@ import { FooterComponent } from './app-layout/footer/footer.component';
 import { NavbarComponent } from './app-layout/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AppLayoutRoutes } from './app-layout/app-layout.routing';
+import { ProductModule } from '../product/product.module';
+import { AuthenticationModule } from '../authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { AppLayoutRoutes } from './app-layout/app-layout.routing';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(AppLayoutRoutes)
+    RouterModule.forChild(AppLayoutRoutes),
+    ProductModule,
+    AuthenticationModule
   ]
 })
 

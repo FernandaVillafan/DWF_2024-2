@@ -1,42 +1,22 @@
-body {
-    margin: auto;
-    max-width: 1280px;
-}
-
 table {
     text-align: center;
 }
 
-th, .td-open, .td-close {
-    cursor: pointer;
+#dropdownMenuButton {
+    background-color: transparent !important;
+}
+
+.card-body, .tr-data {
+    background-color: aliceblue;
 }
 
 .card-header {
-    background-color: #517BDB;
+    background-color: #013A55;
     color: white;
     padding: 20px;
     padding-top: 30px;
 }
 
-.card-title {
-    font-size: x-large;
-    text-align: center;
-}
-
-.categories {
-    font-weight: bold;
-}
-
-.input-error-message{
-    color: #CA2A4A
-}
-
-.td-close:hover {
-    color: orangered;
-    font-weight: bold;
-}
-
-.td-open:hover {
-    color: lightgreen;
-    font-weight: bold;
+.input-error-message {
+    color: #CA2A4A;
 }

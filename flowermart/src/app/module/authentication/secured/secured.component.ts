@@ -9,7 +9,7 @@ import { AuthenticationService } from '../_service/authentication.service';
 
 export class SecuredComponent {
 
-  constructor(private servicioAutenticacion: AuthenticationService){ }
+  constructor(private servicioAutenticacion: AuthenticationService) { }
 
   logout() {
     console.log('Cerrando Sesión');

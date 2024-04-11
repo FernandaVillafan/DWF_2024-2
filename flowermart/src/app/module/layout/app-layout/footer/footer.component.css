@@ -1,27 +1,35 @@
+footer {
+    background-color: #0FA7B4 !important;
+}
+
+span {
+    color: white !important;
+}
+
 .footer {
-    padding: 0.9375rem;
-    text-align: center;
     display: -webkit-flex; 
     display: flex;
+    padding: 0.9375rem;
+    text-align: center;
 
     ul {
+        list-style: none;
         margin-bottom: 0;
         padding: 0;
-        list-style: none;
 
         li {
             display: inline-block;
 
             a {
-                color: inherit;
-                padding: 0.9375rem;
-                font-weight: 500;
-                font-size: 12px;
-                text-transform: uppercase;
                 border-radius: 3px;
-                text-decoration: none;
-                position: relative;
+                color: inherit;
                 display: block;
+                font-size: 12px;
+                font-weight: 500;
+                padding: 0.9375rem;
+                position: relative;
+                text-decoration: none;
+                text-transform: uppercase;
 
                 &:hover {
                     text-decoration: none;
@@ -59,18 +67,18 @@
     .social-buttons {
         a,
         .btn {
-            margin-top: 5px;
             margin-bottom: 5px;
+            margin-top: 5px;
         }
     }
 
     .footer-brand {
         float: left;
-        height: 50px;
-        padding: 15px 15px;
         font-size: 18px;
+        height: 50px;
         line-height: 20px;
         margin-left: -15px;
+        padding: 15px 15px;
 
         &:hover,
         &:focus {
@@ -94,9 +102,9 @@
 }
 
 .off-canvas-sidebar {
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
+    .footer {
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
 }
