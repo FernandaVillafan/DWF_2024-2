@@ -82,19 +82,15 @@ export class CategoryComponent {
   }
 
   getCategories() {
-    if (localStorage.getItem('token') == null) {
-      this.swal.errorMessage("Inicia sesión"); // show message
-    } else {
-      this.categoryService.getCategories().subscribe({
-        next: (v) => {
-          this.categories = v.body!
-        },
-        error: (e) => {
-          console.log(e);
-          this.swal.errorMessage(e.error!.message); // show message
-        }
-      });
-    }
+    this.categoryService.getCategories().subscribe({
+      next: (v) => {
+        this.categories = v.body!
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
   }
 
   updateCategory(category: Category) {
