@@ -92,7 +92,9 @@
                     <!-- Category -->
     
                     <div class="mb-3">
-                      <label for="category" class="form-label">Categoría</label>
+                      <label for="category" class="form-label">Categoría
+                        <span class="color-red">*</span>
+                      </label>
                       <input type="text" class="form-control" formControlName="category" placeholder="Nombre de la categoría"
                         [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
     
@@ -104,7 +106,9 @@
                     <!-- Acronym -->
     
                     <div class="mb-3">
-                        <label for="acronym" class="form-label">Acrónimo</label>
+                        <label for="acronym" class="form-label">Acrónimo
+                            <span class="color-red">*</span>
+                        </label>
                         <input type="text" class="form-control" formControlName="acronym" placeholder="Acrónimo de la categoría"
                           [ngClass]="{'is-invalid': form.controls['acronym'].errors && submitted}">
       
