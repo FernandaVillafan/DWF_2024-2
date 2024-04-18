@@ -1,5 +1,4 @@
-export class DtoProductList 
-{
+export class DtoProductList {
     product_id: number = 0;
     product: string = "";
     gtin: string = "";

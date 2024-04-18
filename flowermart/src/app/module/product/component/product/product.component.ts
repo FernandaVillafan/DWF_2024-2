@@ -14,6 +14,7 @@ declare var $: any; // JQuery
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
+
 export class ProductComponent {
 
   products: DtoProductList[] = []; // product list
@@ -39,7 +40,7 @@ export class ProductComponent {
     private categoryService: CategoryService,
     private productService: ProductService,
     private formBuilder: FormBuilder,
-  ){ }
+  ) { }
 
   ngOnInit() {
     this.getProducts();
