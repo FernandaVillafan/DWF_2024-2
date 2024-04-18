@@ -31,14 +31,26 @@ export class SwalMessages {
    
     // show error message
     errorMessage(message: string) {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            toast: true,
-            text: message,
-            background: '#F8E8F8',
-            showConfirmButton: false,
-            timer: 12000
-        });
+        if (message == null) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                text: "No se pudieron obtener los datos",
+                background: '#F8E8F8',
+                showConfirmButton: false,
+                timer: 12000
+            });
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                text: message,
+                background: '#F8E8F8',
+                showConfirmButton: false,
+                timer: 12000
+            });
+        }
     }
 }

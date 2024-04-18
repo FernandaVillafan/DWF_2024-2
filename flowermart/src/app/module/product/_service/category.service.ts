@@ -33,14 +33,6 @@ export class CategoryService {
     return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id_category, category, { observe: 'response' });
   }
 
-  deleteCategory(id_category: number): Observable<any> {
-    return this.http.delete(api_dwb_uri + this.source + "/" + id_category, { observe: 'response' });
-  }
-
-  activeCategory(id_category: number): Observable<any> {
-    return this.http.put(api_dwb_uri + this.source + "/" + id_category + "/activate", { observe: 'response' });
-  }
-
   getActiveCategories(): Observable<HttpResponse<Category[]>> {
     return this.http.get<Category[]>(api_dwb_uri + this.source + "/active", { observe: 'response' });
   }
