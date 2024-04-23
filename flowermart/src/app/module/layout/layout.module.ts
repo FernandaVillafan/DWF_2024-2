@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppLayoutRoutes } from './app-layout/app-layout.routing';
 import { ProductModule } from '../product/product.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
+import { InvoiceModule } from '../invoice/invoice.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AuthenticationModule } from '../authentication/authentication.module';
     CommonModule,
     RouterModule.forChild(AppLayoutRoutes),
     ProductModule,
+    InvoiceModule,
     AuthenticationModule
   ]
 })
