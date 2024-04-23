@@ -16,9 +16,9 @@ export class CartService {
         return this.http.post<ApiResponse>(api_dwb_uri + this.source, cart, { observe: 'response' });
     }
     getCart(): Observable<HttpResponse<DtoCartDetails[]>> {
-        return this.http.delete<DtoCartDetails[]>(api_dwb_uri + this.source, { observe: 'response' });
+        return this.http.get<DtoCartDetails[]>(api_dwb_uri + this.source , { observe: 'response' });
     }
-    /* REQUERIMIENTO 4. Implementar servicio Cart - función getCart() */
+    /* REQUERIMIENTO 4. Implementar servicio Cart - función clearCart() */
     clearCart() { }
     /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */
     removeFromCart() { }

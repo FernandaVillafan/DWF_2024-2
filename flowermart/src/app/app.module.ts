@@ -11,6 +11,7 @@ import { LayoutModule } from './module/layout/layout.module';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptorInterceptor } from './core/interceptor/jwt-interceptor.interceptor';
 import { CommonsModule } from './module/commons/commons.module';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 @NgModule({
   declarations: [

@@ -48,10 +48,7 @@ export class ProductComponent {
     private productService: ProductService,
     private productImageService: ProductImageService,
     private formBuilder: FormBuilder,
-<<<<<<< Updated upstream
-=======
     private service: NgxPhotoEditorService
->>>>>>> Stashed changes
   ) { }
 
   ngOnInit() {

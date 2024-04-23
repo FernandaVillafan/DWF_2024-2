@@ -9,8 +9,8 @@ export const AppLayoutRoutes: Routes = [
     { path: 'category', component: CategoryComponent },
     { path: 'product', component: ProductComponent },
     { path: 'secured', component: SecuredComponent, canActivate : [authenticationGuard] },
-    {path: "cliente", component: CustomerComponent },
-    {path: "cliente/:rfc", component: CustomerDetailComponent },
+    // {path: "cliente", component: CustomerComponent },
+    // {path: "cliente/:rfc", component: CustomerDetailComponent },
     {path: "factura", component: InvoiceComponent },
-    {path: 'region', component: RegionComponent},
+    // {path: 'region', component: RegionComponent},
 ];
