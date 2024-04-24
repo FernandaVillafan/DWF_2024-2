@@ -3,14 +3,11 @@ import { CategoryComponent } from '../../product/component/category/category.com
 import { ProductComponent } from '../../product/component/product/product.component';
 import { SecuredComponent } from '../../authentication/secured/secured.component';
 import { authenticationGuard } from '../../authentication/_guard/authentication.guard';
-import { InvoiceComponent } from '../../invoice/component/invoice/invoice.component';
+import { ProductDetailsComponent } from '../../product/component/product-details/product-details.component';
 
 export const AppLayoutRoutes: Routes = [
     { path: 'category', component: CategoryComponent },
     { path: 'product', component: ProductComponent },
+    { path: 'product/:gtin', component: ProductDetailsComponent },
     { path: 'secured', component: SecuredComponent, canActivate : [authenticationGuard] },
-    // {path: "cliente", component: CustomerComponent },
-    // {path: "cliente/:rfc", component: CustomerDetailComponent },
-    {path: "factura", component: InvoiceComponent },
-    // {path: 'region', component: RegionComponent},
 ];

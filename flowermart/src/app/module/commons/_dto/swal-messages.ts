@@ -25,7 +25,7 @@ export class SwalMessages {
             text: message,
             background: '#E8F8F8',
             showConfirmButton: false,
-            timer: 12000
+            timer: 5000
         });
     }
    
@@ -39,7 +39,7 @@ export class SwalMessages {
                 text: "No se pudieron obtener los datos",
                 background: '#F8E8F8',
                 showConfirmButton: false,
-                timer: 12000
+                timer: 5000
             });
         } else {
             Swal.fire({
@@ -49,7 +49,7 @@ export class SwalMessages {
                 text: message,
                 background: '#F8E8F8',
                 showConfirmButton: false,
-                timer: 12000
+                timer: 5000
             });
         }
     }

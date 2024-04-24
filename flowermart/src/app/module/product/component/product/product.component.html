@@ -20,7 +20,7 @@
 
   <div class="card-body">
 
-    <!-- Region table  -->
+    <!-- Region table -->
 
     <table class="table">
       <thead class="thead-dark">
@@ -35,7 +35,7 @@
       </thead>
 
       <tbody>
-        @for(product of products; track product; let i = $index ) {
+        @for (product of products; track product; let i = $index) {
         <tr>
           <td class="tr-data">{{ i + 1 }}</td>
           <td class="tr-data">{{ product.gtin }}</td>
@@ -53,7 +53,7 @@
           <td class="tr-data">
             <div class="dropdown">
 
-              <!-- Dots button  -->
+              <!-- Dots button -->
 
               <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
@@ -62,28 +62,20 @@
               <!-- Menu options -->
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @if(product.status != 0){
-                <a class="dropdown-item" (click)="updateProduct(product.gtin)">
-                  <i class="ph ph-note-pencil icon-text-ul"></i>Editar
-                </a>
-                <a class="dropdown-item" (click)="showProductModal(product.gtin)">
+                <a class="dropdown-item"
+                   (click)="showProductDetails(product.gtin)">
                   <i class="ph ph-eye icon-text-ul"></i>Ver detalles
-                </a>
-                <a class="dropdown-item" href="/product/{product.gtin}">
-                  <i class="ph ph-eye icon-text-ul"></i>Ver detalles
-                </a>
-                <a class="dropdown-item" (click)="showImagesModal(product.product_id, product.product)">
-                  <i class="ph ph-image icon-text-ul"></i>Ver imágenes
                 </a>
 
-                <a class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
-                  <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
-                </a>
-                }@else {
-                <a class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
+                <a *ngIf="product.status == 0" class="dropdown-item enable-item"
+                  (click)="enableProduct(product.product_id)">
                   <i class="ph ph-check-circle icon-text-ul"></i>Activar
                 </a>
-                }
+
+                <a *ngIf="product.status == 1" class="dropdown-item disable-item"
+                  (click)="disableProduct(product.product_id)">
+                  <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
+                </a>
               </div>
             </div>
           </td>
@@ -94,23 +86,23 @@
   </div>
 </div>
 
-<!-- Modal form  -->
+<!-- Modal form -->
 
 <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{ productToUpdate == 0? "Nuevo": "Editar"}} Producto</h5>
+        <h5 class="modal-title">Nuevo Producto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-        <!-- Product form  -->
+        <!-- Product form -->
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="row">
 
-            <!-- Gtin  -->
+            <!-- Gtin -->
 
             <div class="col-md-6">
               <div class="mb-3">
@@ -125,7 +117,7 @@
               </div>
             </div>
 
-            <!-- Product  -->
+            <!-- Product -->
 
             <div class="col-md-6">
               <div class="mb-3">
@@ -141,7 +133,7 @@
               </div>
             </div>
 
-            <!-- Price  -->
+            <!-- Price -->
 
             <div class="col-md-6">
               <div class="mb-3">
@@ -157,7 +149,7 @@
               </div>
             </div>
 
-            <!-- Stock  -->
+            <!-- Stock -->
 
             <div class="col-md-6">
               <div class="mb-3">
@@ -173,7 +165,7 @@
               </div>
             </div>
 
-            <!-- Category_id  -->
+            <!-- Category_id -->
 
             <div class="col-md-6">
               <div class="mb-3">
@@ -198,7 +190,7 @@
               </div>
             </div>
 
-            <!-- Description  -->
+            <!-- Description -->
 
             <div class="mb-3">
               <label for="description">Descripción <span class="color-red">*</span>
@@ -214,147 +206,15 @@
             </div>
           </div>
 
-          <!-- Button  -->
+          <!-- Button -->
 
           <div class="form-button">
 
             <button type="submit" class="btn btn-secondary btn-new">
-              Guardar {{ productToUpdate == 0? "": " cambios"}}
+              Guardar
             </button>
           </div>
         </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Product modal  -->
-<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="productModal">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Producto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Product form  -->
-        <div class="row">
-
-          <!-- product  -->
-
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label class="product-label" for="product">Producto </label>
-              <p>{{ product.product }}</p>
-            </div>
-          </div>
-          <!-- gtin  -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label class="product-label" for="gtin">GTIN </label>
-              <p>{{ product.gtin }}</p>
-            </div>
-          </div>
-
-          <!-- price  -->
-
-          <div class="col-md-4">
-            <div class="mb-3">
-              <label class="product-label" for="price">Precio </label>
-              <p>{{ product.price | currency: 'USD'}}</p>
-            </div>
-          </div>
-
-          <!-- stock  -->
-
-          <div class="col-md-4">
-            <div class="mb-3">
-              <label class="product-label" for="stock">Cantidad en stock </label>
-              <p>{{ product.stock }}</p>
-            </div>
-          </div>
-
-          <!-- category_id  -->
-
-          <div class="col-md-4">
-            <div class="mb-3">
-              <label class="product-label" for="category_id">Categoría </label>
-              <p>{{ product.category_id }}</p>
-            </div>
-          </div>
-
-          <!-- description  -->
-
-          <div class="mb-3">
-            <label class="product-label" for="description">Descripción </label>
-            <p>{{ product.description }}</p>
-          </div>
-        </div>
-        <!-- buttons  -->
-
-        <div class="row">
-          <!-- data  -->
-          <div class="col-md-6">
-            <div class="form-button">
-              <button type="button" class="btn btn-primary btn-product-detail"
-                (click)="updateProduct(this.product.gtin)">
-                <i class="ph ph-note-pencil"></i>
-                Editar
-              </button>
-            </div>
-          </div>
-          <!-- images  -->
-          <div class="col-md-6">
-            <div class="form-button">
-              <button type="button" class="btn btn-primary btn-product-images"
-                (click)="showImagesModal(this.product.product_id, this.product.product)">
-                <i class="ph ph-image"></i>
-                Ver imágenes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Images modal  -->
-<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="imagesModal">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ productNameImages }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body-images">
-          <div class="row">
-            <div class="new-image">
-              <label for="uploadImage" class="cursor-pointer btn btn-primary btn-new btn-new-image">
-                <i class="ph ph-plus-circle"></i>
-                <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
-                Agregar imagen
-              </label>
-            </div>
-          </div>
-
-          <div class="row">
-            @for (image of images; track $index) {
-            <div class="col-md-3">
-              <div class="card card-image">
-                <div class="card-body">
-                  <img src="{{ image.image }}" class="card-img-top" alt="...">
-                </div>
-                <div class="card-footer text-center">
-                  <button type="button" class="btn btn-danger btn-delete" (click)="deleteProductImage(image)">
-                    <i class="ph ph-trash"></i>
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            </div>
-            }
-          </div>
-        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,38 @@
+h6 {
+    text-decoration: underline;
+    color: #757883;
+    font-size: small;
+}
+
+h6, .card-image, .card-body-product, .row-md {
+    background-color: #f0f8ff;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    padding: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #757883 !important;
+}
+
+.color-red {
+    color: #CA2A4A;
+}
+
+.description {
+    font-size: large;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.gtin {
+    color: #757883;
+}
+
+.price {
+    font-size: x-large;
+    color: #74d19a;
+    font-weight: 600;
+}
