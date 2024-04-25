@@ -27,6 +27,7 @@ export class ProductDetailsComponent {
 
   category: any | Category = new Category();
   categories: Category[] = []; // category list
+  activeImageIndex: number = 0; 
 
   // Product form
   form = this.formBuilder.group({
@@ -110,7 +111,7 @@ export class ProductDetailsComponent {
     this.form.controls['stock'].setValue(this.product.stock);
     this.form.controls['category_id'].setValue(this.product.category_id);
     this.form.controls['description'].setValue(this.product.description);
-   
+
     this.submitted = false;
     $("#modalForm").modal("show");
   }
@@ -132,7 +133,7 @@ export class ProductDetailsComponent {
     let productImage = new ProductImage();
     productImage.image = image;
     productImage.product_id = this.product.product_id;
-    
+
     this.productImageService.uploadProductImage(productImage).subscribe({
       next: (v) => {
         this.swal.successMessage(v.body!.message); // show message
@@ -145,23 +146,30 @@ export class ProductDetailsComponent {
     });
   }
 
+  deleteActiveImage() {
+    if (this.images.length > 0 && this.activeImageIndex != null) {
+      const imageToDelete = this.images[this.activeImageIndex];
+      this.deleteProductImage(imageToDelete);
+    }
+  }
+
   deleteProductImage(productImage: ProductImage) {
     this.swal.confirmMessage.fire({
       title: 'Favor de confirmar la eliminación de la imagen',
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.productImageService.deleteProductImage(productImage.product_image_id).subscribe({
           next: (v) => {
-            this.swal.successMessage(v.body!.message); // show message
-            this.getProductImages(productImage.product_id); // reload products
+            this.swal.successMessage(v.body!.message);
+            this.getProductImages(productImage.product_id);
           },
           error: (e) => {
             console.error(e);
-            this.swal.errorMessage(e.error!.message); // show message
+            this.swal.errorMessage(e.error!.message);
           }
         });
       }
