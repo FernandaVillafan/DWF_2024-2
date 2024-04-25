@@ -39,50 +39,48 @@
                             [class.active]="i === 0" [attr.aria-current]="i === 0"
                             [attr.aria-label]="'Slide ' + i"></button>
                     </div>
+
                     <div class="carousel-inner">
-                        <div *ngFor="let prod of images; let i = index" class="carousel-item"
+                        <div *ngFor="let product of images; let i = index" class="carousel-item"
                             [class.active]="i === 0">
                             <div class="carousel-del">
-                                <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
+                                <a (click)="deleteProductImage(product.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
                             </div>
-                            <img src="{{ prod.image !== '' ? 'assets/images/' + prod.image : 'assets/images/default-image.png'}}"
+                            <img src="{{ product.image !== '' ? product.image : 'assets/images/default-image.png'}}"
                                 class="d-block w-100" alt="...">
                         </div>
                     </div>
+
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
+
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+
                 <div *ngIf="images.length <= 1" id="carouselExampleIndicators" class="carousel slide"
                     data-ride="carousel">                       
                     <div class="carousel-inner">
                         <div *ngIf="images.length == 0" class="carousel-item active">
                             <img src="assets/images/default-image.png" class="d-block w-100" alt="...">
                         </div>
-                        <div *ngFor="let prod of images" class="carousel-item active">
+                        <div *ngFor="let product of images" class="carousel-item active">
                             <div class="carousel-del">
-                                <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
+                                <a (click)="deleteProductImage(product.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
                             </div>
-                            <img src="{{ prod.image !== '' ? 'assets/images/' + prod.image : 'assets/images/default-image.png'}}"
+                            <img src="{{ product.image !== '' ? product.image : 'assets/images/default-image.png'}}"
                                 class="d-block w-100" alt="...">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <ng-template #defaultImage>
-            <div class="carousel-item active">
-                <img src="assets/images/default-image.png" class="d-block w-100" alt="Imagen Predeterminada">
-            </div>
-        </ng-template>
     
         <!-- Product Data -->
     

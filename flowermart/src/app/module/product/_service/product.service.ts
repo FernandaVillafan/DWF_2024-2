@@ -18,8 +18,24 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
+  getProducts(): Observable<HttpResponse<DtoProductList[]>> {
+    return this.http.get<DtoProductList[]>(api_dwb_uri + this.source, { observe: 'response' });
+  }
+
   createProduct(product: any): Observable<HttpResponse<ApiResponse>> {
     return this.http.post<ApiResponse>(api_dwb_uri + this.source, product, { observe: 'response' });
+  }
+
+  getProduct(gtin: string): Observable<HttpResponse<Product>> {
+    return this.http.get<Product>(api_dwb_uri + this.source + "/" + gtin, { observe: 'response' });
+  }
+
+  updateProductStock(gtin: string, stock: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + gtin + "/stock"+ "/" + stock, null, { observe: 'response' });
+  }
+
+  updateProduct(product: any, id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id, product, { observe: 'response' });
   }
 
   disableProduct(id: number): Observable<HttpResponse<ApiResponse>> {
@@ -30,27 +46,11 @@ export class ProductService {
     return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id + "/activate", null, { observe: 'response' });
   }
 
-  getProduct(gtin: string): Observable<HttpResponse<Product>> {
-    return this.http.get<Product>(api_dwb_uri + this.source + "/" + gtin, { observe: 'response' });
-  }
-
   getActiveProducts(): Observable<HttpResponse<DtoProductList[]>> {
     return this.http.get<DtoProductList[]>(api_dwb_uri + this.source + "/active", { observe: 'response' });
   }
 
-  getProducts(): Observable<HttpResponse<DtoProductList[]>> {
-    return this.http.get<DtoProductList[]>(api_dwb_uri + this.source, { observe: 'response' });
-  }
-
   getProductsByCategory(category_id: number): Observable<HttpResponse<DtoProductList[]>> {
     return this.http.get<DtoProductList[]>(api_dwb_uri + this.source + "/category" + "/" + category_id, { observe: 'response' });
-  }
-
-  updateProduct(product: any, id: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id, product, { observe: 'response' });
-  }
-
-  updateProductStock(gtin: string, stock: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + gtin + "/stock"+ "/" + stock, null, { observe: 'response' });
   }
 }

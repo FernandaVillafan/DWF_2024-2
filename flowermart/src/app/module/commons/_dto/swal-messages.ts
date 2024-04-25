@@ -18,15 +18,27 @@ export class SwalMessages {
     
     // show confirmation message
     successMessage(message: string) {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            toast: true,
-            text: message,
-            background: '#E8F8F8',
-            showConfirmButton: false,
-            timer: 5000
-        });
+        if (message == "imagen registrada") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                toast: true,
+                text: "Se agregó la imagen al producto exitosamente",
+                background: '#E8F8F8',
+                showConfirmButton: false,
+                timer: 5000
+            });
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                toast: true,
+                text: message,
+                background: '#E8F8F8',
+                showConfirmButton: false,
+                timer: 5000
+            });
+        }
     }
    
     // show error message
@@ -37,6 +49,16 @@ export class SwalMessages {
                 icon: 'error',
                 toast: true,
                 text: "No se pudieron obtener los datos",
+                background: '#F8E8F8',
+                showConfirmButton: false,
+                timer: 5000
+            });
+        } else if (message == "FORBIDDEN") {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                toast: true,
+                text: "Inicia sesión para realizar esta acción",
                 background: '#F8E8F8',
                 showConfirmButton: false,
                 timer: 5000

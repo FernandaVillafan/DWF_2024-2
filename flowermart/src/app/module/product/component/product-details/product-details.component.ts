@@ -88,6 +88,20 @@ export class ProductDetailsComponent {
     });
   }
 
+  getProduct() {
+    this.productService.getProduct(this.gtin).subscribe({
+      next: (v) => {
+        this.product = v.body!;
+        this.getCategory(this.product.category_id);
+        this.getProductImages(this.product.product_id);
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
   updateProduct() {
     this.form.reset();
     this.form.controls['product'].setValue(this.product.product);
@@ -101,23 +115,11 @@ export class ProductDetailsComponent {
     $("#modalForm").modal("show");
   }
 
-  getProduct() {
-    this.productService.getProduct(this.gtin).subscribe({
-      next: (v) => {
-        this.product = v.body!;
-        this.getCategory(this.product.category_id);
-      },
-      error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error!.message); // show message
-      }
-    });
-  }
-
   getProductImages(product_id: number) {
     this.productImageService.getProductImages(product_id).subscribe({
       next: (v) => {
         this.images = v.body!;
+        console.log(this.images);
       },
       error: (e) => {
         console.log(e);
@@ -134,7 +136,7 @@ export class ProductDetailsComponent {
     this.productImageService.uploadProductImage(productImage).subscribe({
       next: (v) => {
         this.swal.successMessage(v.body!.message); // show message
-        this.getProductImages(this.gtin); // reload products
+        this.getProductImages(this.product.product_id); // reload products
       },
       error: (e) => {
         console.error(e);
