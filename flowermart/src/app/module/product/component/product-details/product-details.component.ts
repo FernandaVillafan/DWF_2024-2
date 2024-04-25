@@ -27,6 +27,7 @@ export class ProductDetailsComponent {
 
   category: any | Category = new Category();
   categories: Category[] = []; // category list
+
   activeImageIndex: number = 0; 
 
   // Product form
@@ -59,7 +60,7 @@ export class ProductDetailsComponent {
       this.getProduct();
       this.getActiveCategories();
     } else {
-      this.swal.errorMessage("Producto inexistente")
+      this.swal.errorMessage("Producto inexistente");
     }
   }
 
@@ -120,7 +121,6 @@ export class ProductDetailsComponent {
     this.productImageService.getProductImages(product_id).subscribe({
       next: (v) => {
         this.images = v.body!;
-        console.log(this.images);
       },
       error: (e) => {
         console.log(e);
