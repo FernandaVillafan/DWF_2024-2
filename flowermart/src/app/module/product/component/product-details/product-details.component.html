@@ -35,7 +35,7 @@
                 <!-- Carousel for one o more images -->
 
                 <div *ngIf="images.length > 0; else defaultImage" id="carouselExampleIndicators" class="carousel slide"
-                    data-bs-ride="carousel">
+                    data-bs-ride="false">
                     <div class="carousel-indicators" *ngIf="images.length > 1">
                         <button *ngFor="let item of images; let i = index" type="button" class="indicator"
                             data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
@@ -57,13 +57,13 @@
 
                     <!-- Carousel controls, shown only if there are multiple images -->
 
-                    <button *ngIf="images.length > 1" class="carousel-control-prev" type="button"
+                    <button *ngIf="images.length > 1" class="carousel-control-prev" type="button" (click)="decrementImageIndex()"
                         data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
 
-                    <button *ngIf="images.length > 1" class="carousel-control-next" type="button"
+                    <button *ngIf="images.length > 1" class="carousel-control-next" type="button" (click)="incrementImageIndex()"
                         data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>

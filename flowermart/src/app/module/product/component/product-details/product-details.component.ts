@@ -138,12 +138,30 @@ export class ProductDetailsComponent {
       next: (v) => {
         this.swal.successMessage(v.body!.message); // show message
         this.getProductImages(this.product.product_id); // reload products
+        this.activeImageIndex = 0;
       },
       error: (e) => {
         console.error(e);
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+
+  }
+
+  incrementImageIndex() {  
+    if (this.activeImageIndex === (this.images.length - 1)) {
+      this.activeImageIndex = 0;
+    } else {
+      this.activeImageIndex++;
+    }
+  }
+
+  decrementImageIndex() {
+    if (this.activeImageIndex === 0) {
+      this.activeImageIndex = (this.images.length - 1);
+    } else {
+      this.activeImageIndex--;
+    }
   }
 
   deleteActiveImage() {
@@ -166,6 +184,7 @@ export class ProductDetailsComponent {
           next: (v) => {
             this.swal.successMessage(v.body!.message);
             this.getProductImages(productImage.product_id);
+            this.activeImageIndex = 0;
           },
           error: (e) => {
             console.error(e);
