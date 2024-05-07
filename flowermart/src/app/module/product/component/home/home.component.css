@@ -11163,5 +11163,10 @@ fieldset:disabled .btn {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center;
-  background-size: cover;
+  background-size:cover;
+  height: 470px;
+  margin-bottom: -3%;
+}
+.sections-table {
+  width: 100%;
 }
