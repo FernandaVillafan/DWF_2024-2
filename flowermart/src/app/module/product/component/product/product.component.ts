@@ -6,6 +6,7 @@ import { DtoProductList } from '../../_dto/dto-product-list';
 import { Category } from '../../_model/category/category';
 import { CategoryService } from '../../_service/category.service';
 import { Router } from '@angular/router';
+import { PagingConfig } from '../../../commons/_models/paging-config';
 
 declare var $: any; // JQuery
 
@@ -20,6 +21,8 @@ export class ProductComponent {
   products: DtoProductList[] = []; // product list
 
   categories: Category[] = []; // category list
+
+  page: number | Event = 1;
 
   // Product form
   form = this.formBuilder.group({
@@ -42,9 +45,21 @@ export class ProductComponent {
     private router: Router,
   ) { }
 
+  currentPage: number  = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+
+  pageConfig: PagingConfig = {} as PagingConfig;
+
   ngOnInit() {
     this.getProducts();
     this.getActiveCategories();
+
+    this.pageConfig = {
+      itemsPerPage: this.itemsPerPage,
+      currentPage: this.currentPage,
+      totalItems: this.totalItems
+    }
   }
 
   onSubmit() {

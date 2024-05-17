@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { CategoryComponent } from './component/category/category.component';
 import { ProductComponent } from './component/product/product.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,10 @@ import { ProductDetailsComponent } from './component/product-details/product-det
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule 
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPhotoEditorModule,
+    NgxPaginationModule,
   ]
 })
 

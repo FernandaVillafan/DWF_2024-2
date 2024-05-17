@@ -28,6 +28,8 @@ export class ProductDetailsComponent {
   category: any | Category = new Category();
   categories: Category[] = []; // category list
 
+  quantity: number = 1; // quantity of a product
+
   activeImageIndex: number = 0; 
 
   // Product form
@@ -146,6 +148,24 @@ export class ProductDetailsComponent {
       }
     });
 
+  }
+
+  increaseQuantity(): void {
+    this.quantity++;
+  }
+
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  updateQuantity(value: string): void {
+    const parsedValue = parseInt(value, 10);
+
+    if (!isNaN(parsedValue) && parsedValue >= 1) {
+      this.quantity = parsedValue;
+    }
   }
 
   incrementImageIndex() {  

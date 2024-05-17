@@ -80,6 +80,16 @@
 
 /* Tables  */
 
+pagination-controls {
+    background-color: transparent !important;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .td-status {
     border-radius: 8px;
     color: white;

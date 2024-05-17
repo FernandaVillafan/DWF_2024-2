@@ -80,14 +80,10 @@
                             [(ngModel)]="usuario.username" required>
                     </div>
 
-                    <button type="submit" class="btn btn-success" [disabled]="formularioLogin.invalid">Enviar</button>
+                    <div class="form-button">
+                        <button type="submit" class="btn btn-secondary btn-new" [disabled]="formularioLogin.invalid">Enviar</button>
+                    </div>
                 </form>
-            </div>
-            
-            <div class="mt-4">
-                <div class="d-flex justify-content-center links">
-                    ¿Ya tienes una cuenta?&nbsp;<a routerLink="/login" class="ml-2" style="color: #2C3E50;">Inicia Sesión</a>
-                </div>
             </div>
         </div>
     </div>

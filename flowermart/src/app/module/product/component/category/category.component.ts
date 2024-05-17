@@ -3,6 +3,7 @@ import { Category } from '../../_model/category/category';
 import { CategoryService } from '../../_service/category.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
+import { PagingConfig } from '../../../commons/_models/paging-config';
 
 declare var $: any; // JQuery
 
@@ -17,6 +18,8 @@ export class CategoryComponent {
   categories: Category[] = []; // Category List
 
   categoryToUpdate: number = 0; // Category id to update
+
+  page: number | Event = 1;
 
   // Category form
   form = this.formBuilder.group({
@@ -33,8 +36,20 @@ export class CategoryComponent {
     private formBuilder: FormBuilder
   ) { }
 
+  currentPage: number  = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
+
+  pageConfig: PagingConfig = {} as PagingConfig;
+
   ngOnInit() {
     this.getCategories();
+    
+    this.pageConfig = {
+      itemsPerPage: this.itemsPerPage,
+      currentPage: this.currentPage,
+      totalItems: this.totalItems
+    }
   }
 
   onSubmit() {

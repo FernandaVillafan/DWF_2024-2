@@ -34,7 +34,7 @@
             </thead>
 
             <tbody>
-                @for(category of categories; track category; let i = $index) {
+                @for(category of categories | paginate: pageConfig; track category; let i = $index) {
                     <tr>
                         <td class="tr-data">{{ i + 1 }}</td>
                         <td class="tr-data">{{ category.category }}</td>
@@ -74,6 +74,13 @@
                 }
             </tbody>
         </table>
+
+        <!-- Pagination controls -->
+
+        <div class="pagination-container">
+            <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="pageConfig.currentPage = $event">
+            </pagination-controls>
+        </div>
     </div>
 </div>
 
