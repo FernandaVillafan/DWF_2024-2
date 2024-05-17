@@ -11159,10 +11159,11 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
 .bg-image-full { 
-  background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
   height: 470px;
   margin-bottom: -3%;

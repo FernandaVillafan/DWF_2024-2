@@ -17,12 +17,12 @@ export class ErrorInterceptor implements HttpInterceptor {
           console.log('No Autorizado');
         }
         if (error instanceof HttpErrorResponse && error.status === 403) {
-          console.log('No Autenticado. Inicia sesión para acceder a este recurso');
+          console.log('No Autenticado. Inicia sesión para acceder a este recurso.');
         }
         if (error instanceof HttpErrorResponse && error.status === 412) {
           Swal.fire({
             title: 'Sesion expirada',
-            text: 'Tu sesión ha expirado. Inicia sesión nuevamente',
+            text: 'Tu sesión ha expirado. Inicia sesión nuevamente.',
             timer: 5000,
             timerProgressBar: true,
             icon: 'warning',

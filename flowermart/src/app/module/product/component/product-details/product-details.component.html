@@ -29,7 +29,7 @@
 
         <!-- Product Images -->
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card card-image">
 
                 <!-- Carousel for one o more images -->
@@ -80,89 +80,85 @@
         </div>
 
         <ng-template #defaultImage>
-            <img src="assets/images/default-image.png" alt="Imagen Predeterminada">
+            <img src="assets/images/default-image.png" alt="Imagen Predeterminada" class="default-image">
         </ng-template>
 
         <!-- Product Data -->
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card card-body-product">
-                <table class="table">
-                    <thead class="product-title">
-                        <td>
-                            <h6>{{ product.product }}</h6>
-                        </td>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <div class="row-md">
-                                <label class="description">{{ product.description }}</label>
-                            </div>
-                        </tr>
-
-                        <tr>
-                            <div class="row" style="background-color: transparent;">
-                                <td class="col-md gtin">Código de Producto: {{ product.gtin }}</td>
-                            </div>
-                        </tr>
-
-                        <tr>
-                            <div class="row-md">
-                                <td class="col-md price">{{ product.price | currency:'USD':'symbol':'1.2-2'}}</td>
-                            </div>
-                        </tr>
-
-                        @if (product.stock > 0) {
+                <div class="product-details">
+                    <table class="table product-table">
+                        <thead class="product-title">
                             <tr>
-                                <div class="row-md quantity">
-                                    @if (product.stock === 1) {
-                                        <td>Cantidad ({{ product.stock }} disponible)</td>
-                                    } @else {
-                                        <td>Cantidad ({{ product.stock }} disponibles)</td>
-                                    }
+                                <th class="col-md-6 product-title-text">
+                                    <label class="label-product">{{ product.product }}</label>
+                                </th>
 
-                                    <br>
+                                <th class="col-md-6 product-title-text">
+                                    <label class="label-gtin">Código de Producto: {{ product.gtin }}</label>
+                                </th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <label class="label-description">{{ product.description }}</label>
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <td colspan="2">
+                                    <label class="label-price">{{ product.price | currency:'USD':'symbol':'1.2-2'}}</label>
+                                </td>
+                            </tr>
+    
+                            @if (product.stock === 0) {
+                                <tr>
+                                    <td colspan="2">
+                                        <label class="label-stock color-red">Producto no disponible</label>
+                                    </td>
+                                </tr>
+                            } @else {
+                                <tr>
+                                    <td colspan="2">
+                                        @if (product.stock === 1) {
+                                            <label class="label-quantity">Cantidad ({{ product.stock }} disponible)</label>
+                                        } @else {
+                                            <label class="label-quantity">Cantidad ({{ product.stock }} disponibles)</label>
+                                        }
+    
+                                    </td>
+                                </tr>
+    
+                                <tr>
                                     <td class="quantity-btns">
-                                        <button class="btn quantity-btn" (click)="decreaseQuantity()">
+                                        <button class="btn quantity-btn minus" (click)="decreaseQuantity()">
                                             <i class="ph ph-minus"></i>
                                         </button>
 
                                         <input class="quantity-btn quantity-input" id="quantity-display" type="text" [(ngModel)]="quantity"/>
 
-                                        <button class="btn quantity-btn" (click)="increaseQuantity()">
+                                        <button class="btn quantity-btn plus" (click)="increaseQuantity()">
                                             <i class="ph ph-plus"></i>
                                         </button>
                                     </td> 
-                                </div>
-                            </tr>
-                        }
 
-                        @if (product.stock === 0) {
-                            <tr>
-                                <h4 class="col-md stock">Producto no disponible</h4>
-                            </tr>
-                        } @else {
-                            <tr>
-                                <td class="row buy-container">
-                                    <div class="col-md-3"></div>
-
-                                    <div class="col-md-4 buy-btns">
-                                        <button class="btn buy-btn col-md">
+                                    <td class="buy-container">
+                                        <button class="btn buy-btn">
                                             <i class="ph ph-credit-card"></i> Comprar ahora
                                         </button>
-                                    </div>
 
-                                    <div class="col-md-4 buy-btns">
-                                        <button class="btn buy-btn col-md">
+                                        <button class="btn buy-btn">
                                             <i class="ph ph-shopping-cart"></i> Agregar al carrito
                                         </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
