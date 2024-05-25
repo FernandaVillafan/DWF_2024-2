@@ -29,7 +29,7 @@
                     <div class="dropdown-menu nav-dropdown-menu">
                         @for(category of categories; track category) {
                         <a class="dropdown-item nav-dropdown-item"
-                            href="/products-{{category.category.toLowerCase()}}">{{ category.category }}</a>
+                            href="/products/{{ category.category.toLowerCase() }}/{{ category.category_id }}">{{ category.category }}</a>
                         }
                     </div>
                 </li>
@@ -43,10 +43,10 @@
 
                     <div class="dropdown-menu nav-dropdown-menu">
                         <a class="dropdown-item nav-dropdown-item" href="/category">Categorías</a>
-                        <a class="dropdown-item nav-dropdown-item" href="#">Clientes</a>
+                        <a class="dropdown-item nav-dropdown-item" href="/customer">Clientes</a>
                         <a class="dropdown-item nav-dropdown-item" href="/invoice">Facturas</a>
                         <a class="dropdown-item nav-dropdown-item" href="/product">Productos</a>
-                        <a class="dropdown-item nav-dropdown-item" href="#">Regiones</a>
+                        <a class="dropdown-item nav-dropdown-item" href="/region">Regiones</a>
                     </div>
                 </li>
                 }
@@ -75,31 +75,35 @@
 
             <ul class="navbar-nav">
                 @if(loggedIn) {
-                <li class="nav-item dropdown user-information">
+                    <li class="nav-item dropdown user-information">
 
-                    <!-- User logo -->
+                        <!-- User logo -->
 
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img class="img-profile rounded-circle nav-user-img" src="assets/images/user-logo.png">
-                    </a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            <!-- <img class="img-profile rounded-circle nav-user-img" src="{{ customer.image.image !== '' ? customer.image.image : defaultImage}}"> -->
+                        </a>
 
-                    <!-- User options -->
+                        <!-- User options -->
 
-                    <div class="dropdown-menu nav-dropdown-menu nav-dropdown-menu-user">
-                        <a class="dropdown-item nav-dropdown-item" routerLink="#">Perfil</a>
-                        <a class="dropdown-item nav-dropdown-item" routerLink="#">Configuración</a>
+                        <div class="dropdown-menu nav-dropdown-menu nav-dropdown-menu-user">
+                            <a class="dropdown-item nav-dropdown-item" routerLink="#">Perfil</a>
+                            <a class="dropdown-item nav-dropdown-item" routerLink="#">Configuración</a>
 
-                        <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item nav-dropdown-item" (click)="logout()">Cerrar sesión</a>
-                    </div>
-                </li>
+                            <a class="dropdown-item nav-dropdown-item" (click)="logout()">Cerrar sesión</a>
+                        </div>
+                    </li>
                 } @else {
-                <a class="nav-link" (click)="showLoginModal()">Iniciar sesión</a>
+                    <a class="nav-link" (click)="showLoginModal()">Iniciar sesión</a>
                 }
             </ul>
         </div>
+
+        <ng-template #defaultImage>
+            <img src="assets/images/default-image.png" alt="Imagen Predeterminada" class="default-image">
+        </ng-template>
     </div>
 </nav>
 

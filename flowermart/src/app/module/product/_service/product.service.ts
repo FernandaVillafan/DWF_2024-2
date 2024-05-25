@@ -34,16 +34,16 @@ export class ProductService {
     return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + gtin + "/stock"+ "/" + stock, null, { observe: 'response' });
   }
 
-  updateProduct(product: any, id: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id, product, { observe: 'response' });
+  updateProduct(product: any, product_id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + product_id, product, { observe: 'response' });
   }
 
-  disableProduct(id: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + "/" + id, { observe: 'response' });
+  disableProduct(product_id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + "/" + product_id, { observe: 'response' });
   }
 
-  enableProduct(id: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id + "/activate", null, { observe: 'response' });
+  enableProduct(product_id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + product_id + "/activate", null, { observe: 'response' });
   }
 
   getActiveProducts(): Observable<HttpResponse<DtoProductList[]>> {

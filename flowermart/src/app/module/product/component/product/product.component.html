@@ -35,36 +35,32 @@
       </thead>
 
       <tbody>
-        @for (product of products; track product; let i = $index) {
-        <tr>
-          <td class="tr-data">{{ i + 1 }}</td>
-          <td class="tr-data">{{ product.gtin }}</td>
-          <td class="tr-data">{{ product.product }}</td>
-          <td class="tr-data">{{ product.price | currency : "USD" }}</td>
-          <td class="tr-data">
-            <div class="td-status" [ngClass]="{
-                  'td-status-enable': product.status == 1,
-                  'td-status-disable': product.status == 0
-                }">
-              {{ product.status == 0 ? "Inactivo" : "Activo" }}
-            </div>
-          </td>
+        @for (product of products | paginate: pageConfig; track product; let i = $index) {
+          <tr>
+            <td class="tr-data">{{ i + 1 }}</td>
+            <td class="tr-data">{{ product.gtin }}</td>
+            <td class="tr-data">{{ product.product }}</td>
+            <td class="tr-data">{{ product.price | currency : "USD" }}</td>
+            <td class="tr-data">
+              <div class="td-status" [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}">
+                {{ product.status == 0 ? "Inactivo" : "Activo" }}
+              </div>
+            </td>
 
-          <td class="tr-data">
-            <div class="dropdown">
+            <td class="tr-data">
+              <div class="dropdown">
 
-              <!-- Dots button -->
+                <!-- Dots button -->
 
-              <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-              </button>
+                <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                </button>
 
-              <!-- Menu options -->
+                <!-- Menu options -->
 
-              @if (product.status != 0) {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item"
-                     (click)="showProductDetails(product.gtin)">
+                    (click)="showProductDetails(product.gtin)">
                     <i class="ph ph-eye icon-text-ul"></i>Ver detalles
                   </a>
   
@@ -72,16 +68,15 @@
                     (click)="disableProduct(product.product_id)">
                     <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
                   </a>
+
+                  <a *ngIf="product.status == 0" class="dropdown-item enable-item"
+                    (click)="enableProduct(product.product_id)">
+                    <i class="ph ph-check-circle icon-text-ul"></i>Activar
+                  </a>
                 </div>
-              } @else {
-                <a *ngIf="product.status == 0" class="dropdown-item enable-item"
-                  (click)="enableProduct(product.product_id)">
-                  <i class="ph ph-check-circle icon-text-ul"></i>Activar
-                </a>
-              }
-            </div>
-          </td>
-        </tr>
+              </div>
+            </td>
+          </tr>
         }
       </tbody>
     </table>
@@ -89,7 +84,8 @@
     <!-- Pagination controls -->
 
     <div class="pagination-container">
-      <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="pageConfig.currentPage = $event">
+      <pagination-controls previousLabel="Anterior" nextLabel="Siguiente"
+        (pageChange)="pageConfig.currentPage = $event">
       </pagination-controls>
     </div>
   </div>
@@ -121,7 +117,7 @@
                     'is-invalid': form.controls['gtin'].errors && submitted
                   }" />
                 <div *ngIf="form.controls['gtin'].errors && submitted">
-                  <small class="input-error-message">Favor de ingresar un GTIN válido</small>
+                  <small class="input-error-message">Por favor ingresa un GTIN válido</small>
                 </div>
               </div>
             </div>
@@ -137,7 +133,7 @@
                     'is-invalid': form.controls['product'].errors && submitted
                   }" />
                 <div *ngIf="form.controls['product'].errors && submitted">
-                  <small class="input-error-message">Favor de ingresar un nombre de producto válido</small>
+                  <small class="input-error-message">Por favor ingresa un nombre de producto válido</small>
                 </div>
               </div>
             </div>
@@ -153,7 +149,7 @@
                     'is-invalid': form.controls['price'].errors && submitted
                   }" />
                 <div *ngIf="form.controls['price'].errors && submitted">
-                  <small class="input-error-message">Favor de ingresar un precio válido</small>
+                  <small class="input-error-message">Por favor ingresa un precio válido</small>
                 </div>
               </div>
             </div>
@@ -169,7 +165,7 @@
                     'is-invalid': form.controls['stock'].errors && submitted
                   }" />
                 <div *ngIf="form.controls['stock'].errors && submitted">
-                  <small class="input-error-message">Favor de ingresar una cantidad de productos válida</small>
+                  <small class="input-error-message">Por favor ingresa una cantidad de productos válida</small>
                 </div>
               </div>
             </div>
@@ -194,7 +190,7 @@
                   </ng-container>
                 </select>
                 <div *ngIf="form.controls['category_id'].errors && submitted">
-                  <small class="input-error-message">Favor de seleccionar una categoría válida</small>
+                  <small class="input-error-message">Por favor selecciona una categoría válida</small>
                 </div>
               </div>
             </div>
@@ -210,7 +206,7 @@
                 }">
               </textarea>
               <div *ngIf="form.controls['description'].errors && submitted">
-                <small class="input-error-message">Favor de ingresar una descripción válida</small>
+                <small class="input-error-message">Por favor ingresa una descripción válida</small>
               </div>
             </div>
           </div>

@@ -147,7 +147,6 @@ export class ProductDetailsComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
-
   }
 
   increaseQuantity(): void {

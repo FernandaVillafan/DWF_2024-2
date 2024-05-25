@@ -5,12 +5,12 @@
     <div class="card-header">
         <div class="row">
             <div class="col">
-                <h4>Listado de Categorías</h4>
+                <h4>Listado de Regiones</h4>
             </div>
             <div class="col">
                 <button type="button" class="btn btn-secondary" style="float: right;" (click)="showModalForm()">
                     <i class="ph ph-plus-circle"></i>
-                    Agregar categoría
+                    Agregar región
                 </button>
             </div>
         </div>
@@ -20,28 +20,29 @@
 
     <div class="card-body">
 
-        <!-- Category table -->
+        <!-- Region table -->
 
         <table class="table">
             <thead class="thead-dark">
                 <tr class="table-primary">
                     <th>Id</th>
-                    <th>Categoría</th>
-                    <th>Acrónimo</th>
+                    <th>Región</th>
+                    <th>Código</th>
                     <th>Estatus</th>
                     <th>Más</th>
                 </tr>
             </thead>
 
             <tbody>
-                @for(category of categories | paginate: pageConfig; track category; let i = $index) {
+                @for(region of regions | paginate: pageConfig; track region; let i = $index) {
                     <tr>
                         <td class="tr-data">{{ i + 1 }}</td>
-                        <td class="tr-data">{{ category.category }}</td>
-                        <td class="tr-data">{{ category.acronym }}</td>
+                        <td class="tr-data">{{ region.region }}</td>
+                        <td class="tr-data">{{ region.code }}</td>
                         <td class="tr-data">
-                            <div class="td-status" [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}">
-                                {{ category.status == 0 ? "Inactivo" : "Activo" }}
+                            <div class="td-status"
+                                [ngClass]="{'td-status-enable': region.status == 1, 'td-status-disable': region.status == 0}">
+                                {{ region.status == 0 ? "Inactivo" : "Activo" }}
                             </div>
                         </td>
                         <td class="tr-data">
@@ -49,22 +50,25 @@
 
                                 <!-- Dots button -->
 
-                                <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
                                 </button>
-        
+
                                 <!-- Menu options -->
-                                
+
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" (click)="updateCategory(category)">
+                                    <a class="dropdown-item" (click)="updateRegion(region)">
                                         <i class="ph ph-note-pencil icon-text-ul"></i>Editar
                                     </a>
-                                    
-                                    <a *ngIf="category.status == 0" class="dropdown-item enable-item" (click)="enableCategory(category.category_id)">
+
+                                    <a *ngIf="region.status == 0" class="dropdown-item enable-item"
+                                        (click)="enableRegion(region.region_id)">
                                         <i class="ph ph-check-circle icon-text-ul"></i>Activar
                                     </a>
-                                    
-                                    <a *ngIf="category.status == 1" class="dropdown-item disable-item" (click)="disableCategory(category.category_id)">
+
+                                    <a *ngIf="region.status == 1" class="dropdown-item disable-item"
+                                        (click)="disableRegion(region.region_id)">
                                         <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
                                     </a>
                                 </div>
@@ -91,48 +95,50 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ categoryToUpdate == 0? "Nueva": "Editar"}} Categoría</h5>
+                <h5 class="modal-title">{{ regionToUpdate == 0? "Nueva": "Editar"}} Región</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
+
             <div class="modal-body">
 
-                <!-- Category form -->
+                <!-- Region form -->
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
-                    <!-- Category -->
-    
+
+                    <!-- Region -->
+
                     <div class="mb-3">
-                        <label for="category" class="form-label">Categoría
+                        <label for="region" class="form-label">Región
                             <span class="color-red">*</span>
                         </label>
-                        <input type="text" class="form-control" formControlName="category" placeholder="Nombre de la categoría"
-                            [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
-                    
-                        @if (form.controls['category'].errors && submitted) {
-                            <small class="input-error-message">Por favor ingresa un nombre de categoría</small>
+                        <input type="text" class="form-control" formControlName="region"
+                            placeholder="Nombre de la región"
+                            [ngClass]="{'is-invalid': form.controls['region'].errors && submitted}">
+
+                        @if (form.controls['region'].errors && submitted) {
+                            <small class="input-error-message">Por favor ingresa un nombre de región</small>
                         }
                     </div>
 
-                    <!-- Acronym -->
-    
+                    <!-- Code -->
+
                     <div class="mb-3">
-                        <label for="acronym" class="form-label">Acrónimo
+                        <label for="code" class="form-label">Código
                             <span class="color-red">*</span>
                         </label>
-                        <input type="text" class="form-control" formControlName="acronym" placeholder="Acrónimo de la categoría"
-                          [ngClass]="{'is-invalid': form.controls['acronym'].errors && submitted}">
-      
-                        @if (form.controls['acronym'].errors && submitted) {
-                          <small class="input-error-message">Por favor ingresa un acrónimo de categoría</small>
+                        <input type="text" class="form-control" formControlName="code" placeholder="Código de la región"
+                            [ngClass]="{'is-invalid': form.controls['code'].errors && submitted}">
+
+                        @if (form.controls['code'].errors && submitted) {
+                            <small class="input-error-message">Por favor ingresa un código de región</small>
                         }
                     </div>
-    
+
                     <!-- Button -->
-    
+
                     <div class="form-button">
-                        <button type="submit" class="btn btn-secondary btn-new">Guardar {{ categoryToUpdate == 0? "": " cambios"}}</button>
+                        <button type="submit" class="btn btn-secondary btn-new">Guardar {{ regionToUpdate == 0? "": "
+                            cambios"}}</button>
                     </div>
                 </form>
             </div>
