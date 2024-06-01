@@ -109,6 +109,15 @@ td, th, .card-body-product, .card-image {
 
 .quantity-btn {
     background-color: #013a56;
+    border-color: none;
+}
+
+.quantity-btn:hover,
+.quantity-btn:focus,
+.quantity-btn:active {
+    background-color: #013a56 !important;
+    border-color: none;
+    color: white !important;
 }
 
 .quantity-btn.minus {

@@ -80,7 +80,7 @@
         </div>
 
         <ng-template #defaultImage>
-            <img src="assets/images/default-image.png" alt="Imagen Predeterminada" class="default-image">
+            <img src="assets/images/default-image.png" alt="..." class="default-image">
         </ng-template>
 
         <!-- Product Data -->
@@ -146,11 +146,11 @@
                                     </td> 
 
                                     <td class="buy-container">
-                                        <button class="btn buy-btn">
+                                        <button class="btn buy-btn" (click)="navigateToBuy()">
                                             <i class="ph ph-credit-card"></i> Comprar ahora
                                         </button>
 
-                                        <button class="btn buy-btn">
+                                        <button class="btn buy-btn" (click)="addToCart()">
                                             <i class="ph ph-shopping-cart"></i> Agregar al carrito
                                         </button>
                                     </td>

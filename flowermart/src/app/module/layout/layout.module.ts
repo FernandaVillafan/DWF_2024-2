@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
-import { FooterComponent } from './app-layout/footer/footer.component';
-import { NavbarComponent } from './app-layout/navbar/navbar.component';
-import { RouterModule } from '@angular/router';
 import { AppLayoutRoutes } from './app-layout/app-layout.routing';
-import { ProductModule } from '../product/product.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from './app-layout/footer/footer.component';
 import { InvoiceModule } from '../invoice/invoice.module';
+import { NavbarComponent } from './app-layout/navbar/navbar.component';
+import { NgModule } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductModule } from '../product/product.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

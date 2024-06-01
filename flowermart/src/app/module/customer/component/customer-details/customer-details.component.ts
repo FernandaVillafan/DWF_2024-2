@@ -1,14 +1,14 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
-import { CustomerService } from '../../_service/customer.service';
 import { Customer } from '../../_model/customer/customer';
+import { CustomerImage } from '../../_model/customer/customer-image';
+import { CustomerImageService } from '../../_service/customer-image.service';
+import { CustomerService } from '../../_service/customer.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { Region } from '../../_model/region/region';
 import { RegionService } from '../../_service/region.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerImageService } from '../../_service/customer-image.service';
-import { NgxPhotoEditorService } from 'ngx-photo-editor';
-import { CustomerImage } from '../../_model/customer/customer-image';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -21,10 +21,11 @@ declare var $: any; // JQuery
 export class CustomerDetailsComponent {
 
   customer: any | Customer = new Customer; // customer
+  rfc: any | number = 0;
   regions: Region[] = []; // region list
   region: any | Region = new Region();
 
-  rfc: any | number = 0;
+  isAdmin = false;
 
   // Customer form
   form = this.formBuilder.group({
@@ -51,6 +52,17 @@ export class CustomerDetailsComponent {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem("user")) {
+
+      let user = JSON.parse(localStorage.getItem("user")!);
+
+      if (user.rol == "ADMIN") {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    }
+
     this.rfc = this.route.snapshot.paramMap.get('rfc');
     if (this.rfc) {
       this.getCustomer();

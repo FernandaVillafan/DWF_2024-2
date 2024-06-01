@@ -1,3 +1,23 @@
+.cart-count {
+    align-items: center;
+    background-color: #d26464;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    font-size: 12px;
+    height: 20px;
+    justify-content: center;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 20px;
+}
+
+.cart-icon-container {
+    display: inline-block;
+    position: relative;
+}
+
 .form-control {
     background-color: white !important;
     border: none;

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../_model/usuario';
-import { HttpClient } from '@angular/common/http';
-import { urlApiRegistroUsuario } from '../_helper/urls';
 import { faBuilding, faEnvelope, faUser }  from '@fortawesome/free-solid-svg-icons';
 import { faGlobe, faKey, faLocationArrow, faUserPlus, faUserSecret } from '@fortawesome/free-solid-svg-icons';
-import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { urlApiRegistroUsuario } from '../_helper/urls';
+import { Usuario } from '../_model/usuario';
 
 @Component({
   selector: 'app-register',

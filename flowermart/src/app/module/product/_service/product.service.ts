@@ -1,10 +1,10 @@
+import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
+import { ApiResponse } from '../../commons/_dto/api-response';
+import { DtoProductList } from '../_dto/dto-product-list';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../../commons/_dto/api-response';
-import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
 import { Product } from '../_model/product/product';
-import { DtoProductList } from '../_dto/dto-product-list';
 
 @Injectable({
   providedIn: 'root'

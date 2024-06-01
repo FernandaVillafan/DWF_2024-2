@@ -1,9 +1,10 @@
+import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
+import { ApiResponse } from '../../commons/_dto/api-response';
+import { DtoCartDetails } from '../_dto/dto-cart-details';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../../commons/_dto/api-response';
-import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
-import { DtoCartDetails } from '../_dto/dto-cart-details';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,21 @@ export class CartService {
   }
 
   deleteCart(): Observable<HttpResponse<ApiResponse>> {
-    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + "/clear", { observe: 'response' });
+    return this.http.delete<ApiResponse>(api_dwb_uri + this.source, { observe: 'response' });
   }
 
-  removeFromCart(id_product: number): Observable<HttpResponse<ApiResponse>> {
-    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + "/" + id_product, { observe: 'response' });
+  removeFromCart(product_id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + "/" + product_id, { observe: 'response' });
+  }
+
+  getCartItemCount(): Observable<number> {
+    return this.http.get<DtoCartDetails[]>(api_dwb_uri + this.source, { observe: 'response' }).pipe(
+      map(response => {
+        if (response.body) {
+          return response.body.reduce((total, item) => total + item.quantity, 0);
+        }
+        return 0;
+      })
+    );
   }
 }

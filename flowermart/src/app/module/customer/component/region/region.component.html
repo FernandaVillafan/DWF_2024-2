@@ -112,7 +112,7 @@
                             <span class="color-red">*</span>
                         </label>
                         <input type="text" class="form-control" formControlName="region"
-                            placeholder="Nombre de la región"
+                            placeholder="Nombre de la región..."
                             [ngClass]="{'is-invalid': form.controls['region'].errors && submitted}">
 
                         @if (form.controls['region'].errors && submitted) {
@@ -126,7 +126,7 @@
                         <label for="code" class="form-label">Código
                             <span class="color-red">*</span>
                         </label>
-                        <input type="text" class="form-control" formControlName="code" placeholder="Código de la región"
+                        <input type="text" class="form-control" formControlName="code" placeholder="Código de la región..."
                             [ngClass]="{'is-invalid': form.controls['code'].errors && submitted}">
 
                         @if (form.controls['code'].errors && submitted) {

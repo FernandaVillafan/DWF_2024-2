@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
-import { ProductService } from '../../_service/product.service';
-import { DtoProductList } from '../../_dto/dto-product-list';
 import { Category } from '../../_model/category/category';
 import { CategoryService } from '../../_service/category.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { DtoProductList } from '../../_dto/dto-product-list';
+import { FormBuilder, Validators } from '@angular/forms';
 import { PagingConfig } from '../../../commons/_models/paging-config';
+import { ProductService } from '../../_service/product.service';
+import { Router } from '@angular/router';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -46,7 +46,7 @@ export class ProductComponent {
   ) { }
 
   currentPage: number  = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalItems: number = 0;
 
   pageConfig: PagingConfig = {} as PagingConfig;

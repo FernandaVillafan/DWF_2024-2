@@ -1,10 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
 import { ApiResponse } from '../../commons/_dto/api-response';
 import { Customer } from '../_model/customer/customer';
 import { DtoCustomerList } from '../_dto/dto-customer-list';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +44,9 @@ export class CustomerService {
 
   getCustomer(rfc: string): Observable<HttpResponse<Customer>> {
     return this.http.get<Customer>(api_dwb_uri + this.source + "/" + rfc, { observe: 'response' });
+  }
+
+  getCustomerDetail(): Observable<HttpResponse<Customer>> {
+    return this.http.get<Customer>(api_dwb_uri + this.source + "/detail", { observe: 'response' });
   }
 }

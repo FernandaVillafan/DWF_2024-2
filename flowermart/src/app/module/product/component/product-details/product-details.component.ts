@@ -1,14 +1,17 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../../../invoice/_service/cart.service';
+import { Category } from '../../_model/category/category';
+import { CategoryService } from '../../_service/category.service';
 import { Component } from '@angular/core';
+import { Customer } from '../../../customer/_model/customer/customer';
+import { CustomerService } from '../../../customer/_service/customer.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
-import { ProductService } from '../../_service/product.service';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { Product } from '../../_model/product/product';
 import { ProductImage } from '../../_model/product/product-image';
 import { ProductImageService } from '../../_service/product-image.service';
-import { Category } from '../../_model/category/category';
-import { CategoryService } from '../../_service/category.service';
-import { NgxPhotoEditorService } from 'ngx-photo-editor';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../_service/product.service';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -22,15 +25,21 @@ export class ProductDetailsComponent {
 
   product: Product = new Product(); // product
   gtin: any | string = "";
+  quantity: number = 1; // quantity of a product
+
+  customer: Customer = new Customer(); // customer
+  rfc: any | string = "";
 
   images: any | ProductImage[] = []; // product images
 
   category: any | Category = new Category();
   categories: Category[] = []; // category list
 
-  quantity: number = 1; // quantity of a product
+  cartItemCount: number = 0;
 
   activeImageIndex: number = 0; 
+
+  productData: any[] = [];
 
   // Product form
   form = this.formBuilder.group({
@@ -53,6 +62,8 @@ export class ProductDetailsComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private productImageService: ProductImageService,
+    private customerService: CustomerService,
+    private cartService: CartService,
     private service: NgxPhotoEditorService,
   ) { }
 
@@ -61,6 +72,7 @@ export class ProductDetailsComponent {
     if (this.gtin) {
       this.getProduct();
       this.getActiveCategories();
+      this.getCustomerDetail();
     } else {
       this.swal.errorMessage("Producto inexistente");
     }
@@ -214,6 +226,69 @@ export class ProductDetailsComponent {
     });
   }
 
+  addToCart() {
+    if (!isNaN(this.quantity) && this.quantity >= 1) {
+      if (this.gtin) {
+        const newItem = {
+          rfc: this.rfc,
+          gtin: this.gtin,
+          quantity: this.quantity
+        };
+  
+        this.cartService.addToCart(newItem).subscribe({
+          next: (v) => {
+            this.swal.successMessage(v.body!.message);
+            this.getCartItemCount();
+          },
+          error: (e) => {
+            console.error(e);
+            this.swal.errorMessage(e.error!.message);
+          }
+        });
+      } else {
+        console.error('El valor de GTIN es nulo o no válido');
+        this.swal.errorMessage('¡GTIN inválido!');
+      }
+    } else {
+      this.swal.errorMessage('¡Cantidad inválida!');
+    }
+  }
+
+  getCartItemCount() {
+    this.cartService.getCartItemCount().subscribe(count => {
+      this.cartItemCount = count;
+    });
+  }
+
+  addToProductData() {
+    if (this.gtin && this.quantity) {
+      const product = {
+        gtin: this.product.gtin,
+        product: this.product.product,
+        price: this.product.price,
+        quantity: this.quantity,
+        image: this.images[0].image
+      };
+      this.productData.push(product);
+    } else {
+      console.error('El valor de GTIN o la cantidad son nulos o no válidos');
+    }
+  }
+  
+  navigateToBuy() {
+    this.addToProductData();
+
+    if (this.productData.length > 0 && this.rfc) {
+      const customerData = {
+        rfc: this.rfc
+      };
+
+      this.router.navigate(['/product/' + this.gtin + '/buy'], { state: { products: this.productData, customer: customerData } });
+    } else {
+      console.error('No hay productos seleccionados o los datos del cliente son nulos o no válidos');
+    }
+  }
+
   fileChangeHandler($event: any) {
     this.service.open($event, {
       aspectRatio: 4 / 4,
@@ -237,6 +312,21 @@ export class ProductDetailsComponent {
 
   hideModalForm() {
     $("#modalForm").modal("hide");
+  }
+
+  // Customer 
+
+  getCustomerDetail() {
+    this.customerService.getCustomerDetail().subscribe({
+      next: (v) => {
+        this.customer = v.body!;
+        this.rfc = this.customer.rfc;
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    })
   }
 
   // Category

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
 import { CustomerService } from '../../_service/customer.service';
 import { DtoCustomerList } from '../../_dto/dto-customer-list';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 import { PagingConfig } from '../../../commons/_models/paging-config';
-import { RegionService } from '../../_service/region.service';
 import { Region } from '../../_model/region/region';
+import { RegionService } from '../../_service/region.service';
+import { Router } from '@angular/router';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -45,13 +45,14 @@ export class CustomerComponent {
   ) { }
 
   currentPage: number  = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalItems: number = 0;
 
   pageConfig: PagingConfig = {} as PagingConfig;
 
   ngOnInit() {
     this.getCustomers();
+    this.getActiveRegions();
 
     this.pageConfig = {
       itemsPerPage: this.itemsPerPage,

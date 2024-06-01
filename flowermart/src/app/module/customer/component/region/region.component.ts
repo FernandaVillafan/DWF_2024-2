@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PagingConfig } from '../../../commons/_models/paging-config';
 import { Region } from '../../_model/region/region';
 import { RegionService } from '../../_service/region.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
-import { PagingConfig } from '../../../commons/_models/paging-config';
 
 declare var $: any; // JQuery
 
@@ -38,7 +37,7 @@ export class RegionComponent {
   ) { }
 
   currentPage: number  = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalItems: number = 0;
 
   pageConfig: PagingConfig = {} as PagingConfig;
@@ -56,14 +55,14 @@ export class RegionComponent {
   onSubmit() {
     // validate form
     this.submitted = true;
-    if(this.form.invalid) return;
+    if (this.form.invalid) return;
     this.submitted = false;
 
 
     // validate regionToUpdate
-    if(this.regionToUpdate == 0){
+    if (this.regionToUpdate == 0) {
       this.onSubmitCreate();
-    }else{
+    } else {
       this.onSubmitUpdate();
     }
   }

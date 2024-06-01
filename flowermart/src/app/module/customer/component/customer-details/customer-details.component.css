@@ -45,6 +45,7 @@ td, th, .card-body-customer, .card-image {
 }
 
 .d-block, .default-image {
+    border-radius: 50%;
     height: 68.5vh;
 }
 

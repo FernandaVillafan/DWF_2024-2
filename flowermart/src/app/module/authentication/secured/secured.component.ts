@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { AuthenticationService } from '../_service/authentication.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-secured',

@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegionComponent } from './component/region/region.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomerDetailsComponent } from './component/customer-details/customer-details.component';
-import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import { CustomerComponent } from './component/customer/customer.component';
+import { CustomerDetailsComponent } from './component/customer-details/customer-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import { RegionComponent } from './component/region/region.component';
 
 @NgModule({
   declarations: [

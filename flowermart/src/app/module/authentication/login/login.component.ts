@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { Usuario } from '../_model/usuario';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AuthenticationService } from '../_service/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs/operators';
 import { faKey, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoginResponse } from '../_model/login-response';
+import { Subscription, switchMap, of } from 'rxjs';
+import { SwalMessages } from '../../commons/_dto/swal-messages';
+import { Usuario } from '../_model/usuario';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ import { LoginResponse } from '../_model/login-response';
 })
 
 export class LoginComponent implements OnInit {
+
+  swal: SwalMessages = new SwalMessages(); // Swal messages
 
   usernameIcon = faUserSecret;
   passwordIcon = faKey;
@@ -41,10 +45,13 @@ export class LoginComponent implements OnInit {
     usuario.password = loginFormValue['password'];
     
     this.subscriptions.push(
-      this.authenticationService.login(usuario).subscribe(
+      of(null).pipe(
+        delay(1000),
+        switchMap(() => this.authenticationService.login(usuario))
+      ).subscribe(
         (response: HttpResponse<LoginResponse>) => {
           if(response.body  === null || response.body.token === null) {
-            console.log('La respesta no devuelve el contenido esperado')
+            console.log('La respuesta no devuelve el contenido esperado')
             return;
           }
 
@@ -60,7 +67,7 @@ export class LoginComponent implements OnInit {
           window.location.reload();
         },
         (errorResponse: HttpErrorResponse) => {
-          alert(errorResponse.error.message);
+          this.swal.errorMessage(errorResponse.error.message);
           this.showLoading = false;
         }
       )

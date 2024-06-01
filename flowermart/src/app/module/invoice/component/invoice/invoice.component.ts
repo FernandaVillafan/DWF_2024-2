@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
 import { DtoInvoiceList } from '../../_dto/dto-invoice-list';
 import { InvoiceService } from '../../_service/invoice.service';
 import { PagingConfig } from '../../../commons/_models/paging-config';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -24,7 +24,7 @@ export class InvoiceComponent {
   ) { }
 
   currentPage: number  = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalItems: number = 0;
 
   pageConfig: PagingConfig = {} as PagingConfig;

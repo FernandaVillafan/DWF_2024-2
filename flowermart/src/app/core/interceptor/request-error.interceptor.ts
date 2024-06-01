@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { AuthenticationService } from '../../module/authentication/_service/authentication.service';
+import { catchError } from 'rxjs/operators';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             icon: 'warning',
             showConfirmButton: true
           }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
               this.authService.logOut();
               location.reload();
             }

@@ -16,15 +16,15 @@
                         <div class="hover-text">{{ product.product + "\n$" + product.price}}</div>
                         <img *ngIf="images[product.product_id] && images[product.product_id].length > 0; else defaultImage"
                             [src]="images[product.product_id][0].image !== '' ? images[product.product_id][0].image : 'assets/images/default-image.png'"
-                            class="d-block w-100" alt="Imagen del Producto">
+                            class="d-block w-100" alt="...">
                         
                         <div class="text-center">
-                            <h3>{{product.product}}</h3>
+                            <h3>{{ product.product }}</h3>
                         </div>
                     </div>
                     
                     <ng-template #defaultImage>
-                        <img src="assets/images/default-image.png" alt="Imagen Predeterminada" class="default-image">
+                        <img src="assets/images/default-image.png" alt="..." class="default-image">
                     </ng-template>
                 </div>
             }

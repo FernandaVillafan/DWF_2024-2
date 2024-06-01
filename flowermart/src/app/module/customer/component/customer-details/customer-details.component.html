@@ -4,22 +4,24 @@
 
     <!-- Buttons -->
 
-    <div class="row">
-        <div class="col">
-            <label for="uploadImage" class="btn btn-secondary">
-                <i class="ph ph-plus-circle"></i>
-                <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
-                Editar imagen
-            </label>
-        </div>
+    @if (isAdmin) {
+        <div class="row">
+            <div class="col">
+                <label for="uploadImage" class="btn btn-secondary">
+                    <i class="ph ph-plus-circle"></i>
+                    <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
+                    Editar imagen
+                </label>
+            </div>
 
-        <div class="col">
-            <button type="button" class="btn btn-secondary" style="float: right" (click)="updateCustomer()">
-                <i class="ph ph-plus-circle"></i>
-                Editar datos
-            </button>
+            <div class="col">
+                <button type="button" class="btn btn-secondary" style="float: right" (click)="updateCustomer()">
+                    <i class="ph ph-plus-circle"></i>
+                    Editar datos
+                </button>
+            </div>
         </div>
-    </div>
+    }
 </div>
 
 <br>
@@ -32,14 +34,14 @@
         <div class="col-md-5">
             <div class="card card-image">
                 <div class="card-body-customer text-center">
-                    <img src="{{ customer.image.image !== '' ? customer.image.image : defaultImage}}"
+                    <img src="{{ customer.image.image !== '' ? customer.image.image : defaultImage }}"
                     class="d-block w-100" alt="...">
                 </div>
             </div>
         </div>
 
         <ng-template #defaultImage>
-            <img src="assets/images/default-image.png" alt="Imagen Predeterminada" class="default-image">
+            <img src="assets/images/default-image.png" alt="..." class="default-image">
         </ng-template>
 
         <!-- Customer Data -->

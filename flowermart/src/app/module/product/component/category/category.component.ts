@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
 import { Category } from '../../_model/category/category';
 import { CategoryService } from '../../_service/category.service';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
 import { PagingConfig } from '../../../commons/_models/paging-config';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
 
@@ -37,7 +37,7 @@ export class CategoryComponent {
   ) { }
 
   currentPage: number  = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalItems: number = 0;
 
   pageConfig: PagingConfig = {} as PagingConfig;

@@ -107,7 +107,7 @@
                         <label for="category" class="form-label">Categoría
                             <span class="color-red">*</span>
                         </label>
-                        <input type="text" class="form-control" formControlName="category" placeholder="Nombre de la categoría"
+                        <input type="text" class="form-control" formControlName="category" placeholder="Nombre de la categoría..."
                             [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
                     
                         @if (form.controls['category'].errors && submitted) {
@@ -121,7 +121,7 @@
                         <label for="acronym" class="form-label">Acrónimo
                             <span class="color-red">*</span>
                         </label>
-                        <input type="text" class="form-control" formControlName="acronym" placeholder="Acrónimo de la categoría"
+                        <input type="text" class="form-control" formControlName="acronym" placeholder="Acrónimo de la categoría..."
                           [ngClass]="{'is-invalid': form.controls['acronym'].errors && submitted}">
       
                         @if (form.controls['acronym'].errors && submitted) {

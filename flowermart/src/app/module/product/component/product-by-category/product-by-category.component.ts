@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SwalMessages } from '../../../commons/_dto/swal-messages';
-import { DtoProductList } from '../../_dto/dto-product-list';
-import { ProductImage } from '../../_model/product/product-image';
-import { ProductService } from '../../_service/product.service';
-import { ProductImageService } from '../../_service/product-image.service';
 import { Category } from '../../_model/category/category';
 import { CategoryService } from '../../_service/category.service';
+import { Component } from '@angular/core';
+import { DtoProductList } from '../../_dto/dto-product-list';
+import { ProductImage } from '../../_model/product/product-image';
+import { ProductImageService } from '../../_service/product-image.service';
+import { ProductService } from '../../_service/product.service';
+import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 @Component({
   selector: 'app-product-by-category',
@@ -94,7 +94,7 @@ export class ProductByCategoryComponent {
     if (gtin) {
       this.router.navigate(['/product/', gtin]);
     } else {
-      this.swal.errorMessage("No hay información de producto para mostrar");
+      this.swal.errorMessage("No hay información del producto para mostrar");
     }
   }
 }
