@@ -1,3 +1,9 @@
+hr {
+    color: #013a55;
+    display: inline-block;
+    width: 60%;
+}
+
 table {
     text-align: center;
 }
@@ -21,9 +27,13 @@ th {
     height: 60px;
 }
 
+.hr-container {
+    text-align: center;
+}
+
 .ph-hand-coins {
     float: left;
-    margin-left: 73px;
+    margin-left: 110px;
 }
 
 .span-data {

@@ -2,6 +2,7 @@ import { authenticationGuard } from '../../authentication/_guard/authentication.
 import { BuyComponent } from '../../invoice/component/buy/buy.component';
 import { CartComponent } from '../../invoice/component/cart/cart.component';
 import { CategoryComponent } from '../../product/component/category/category.component';
+import { CustomerBuyingsComponent } from '../../customer/component/customer-buyings/customer-buyings.component';
 import { CustomerComponent } from '../../customer/component/customer/customer.component';
 import { CustomerDetailsComponent } from '../../customer/component/customer-details/customer-details.component';
 import { HomeComponent } from '../../home/home.component';
@@ -15,9 +16,11 @@ import { SecuredComponent } from '../../authentication/secured/secured.component
 
 export const AppLayoutRoutes: Routes = [
     { path: 'cart', component: CartComponent },
+    { path: 'cart/buy', component: BuyComponent },
     { path: 'category', component: CategoryComponent },
     { path: "customer", component: CustomerComponent },
     { path: "customer/:rfc", component: CustomerDetailsComponent },
+    { path: "customer/:rfc/buyings", component: CustomerBuyingsComponent },
     { path: 'invoice', component: InvoiceComponent },
     { path: 'product', component: ProductComponent },
     { path: 'product/:gtin', component: ProductDetailsComponent },

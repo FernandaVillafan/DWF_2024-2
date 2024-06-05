@@ -20,8 +20,7 @@
                         <h2>Carrito ({{ cartItemCount }} artículo)</h2>
                     } @else {
                         <h2>Carrito ({{ cartItemCount }} artículos)</h2>
-                    }
-                    
+                    } 
                 </div>
                 
                 <div class="col">
@@ -103,7 +102,7 @@
 
                             <br>
 
-                            <button type="button" class="btn btn-secondary btn-buy btn-block" (click)="redirect()">
+                            <button type="button" class="btn btn-secondary btn-buy btn-block" (click)="navigateToBuy()">
                                 <i class="ph ph-credit-card icon-text-button"></i>
                                 Comprar
                             </button>

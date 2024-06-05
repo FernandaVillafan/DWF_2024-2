@@ -68,7 +68,7 @@ export class CustomerDetailsComponent {
       this.getCustomer();
       this.getActiveRegions();
     } else {
-      this.swal.errorMessage("Cliente inexistente");
+      this.swal.errorMessage("¡Cliente Inexistente!");
     }
   }
 

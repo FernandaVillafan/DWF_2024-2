@@ -21,9 +21,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
         if (error instanceof HttpErrorResponse && error.status === 412) {
           Swal.fire({
-            title: 'Sesion expirada',
+            title: 'Sesión Expirada',
             text: 'Tu sesión ha expirado. Inicia sesión nuevamente.',
-            timer: 5000,
+            timer: 4000,
             timerProgressBar: true,
             icon: 'warning',
             showConfirmButton: true

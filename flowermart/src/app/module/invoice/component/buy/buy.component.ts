@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Customer } from '../../../customer/_model/customer/customer';
 import { CustomerService } from '../../../customer/_service/customer.service';
+import { InvoiceService } from '../../_service/invoice.service';
 import { PagingConfig } from '../../../commons/_models/paging-config';
 import { Product } from '../../../product/_model/product/product';
 import { ProductImage } from '../../../product/_model/product/product-image';
 import { ProductImageService } from '../../../product/_service/product-image.service';
 import { ProductService } from '../../../product/_service/product.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
@@ -37,7 +39,9 @@ export class BuyComponent {
   constructor(
     private productService: ProductService,
     private productImageService: ProductImageService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private invoiceService: InvoiceService,
+    private router: Router,
   ) { }
 
   currentPage: number  = 1;
@@ -61,7 +65,7 @@ export class BuyComponent {
       this.calculateTotal();
     } else {
       console.error('Los datos del producto y/o cliente no están disponibles');
-      this.swal.errorMessage('Los datos son inválidos para realizar la compra');
+      this.swal.errorMessage('¡Los datos son inválidos para realizar la compra!');
     }
 
     this.pageConfig = {
@@ -71,9 +75,8 @@ export class BuyComponent {
     }
   }
 
-  async confirmPurchase() {
-
-    await this.swal.confirmMessage.fire({
+  confirmPurchase() {
+    this.swal.confirmMessage.fire({
       title: '¿Deseas continuar con la compra?',
       icon: 'warning',
       showCancelButton: true,
@@ -83,21 +86,22 @@ export class BuyComponent {
       if (result.isConfirmed) {
         Swal.fire({
           imageUrl: 'assets/images/loading.gif',
-          imageWidth: 120,
-          imageHeight: 120,
+          imageWidth: 350,
+          imageHeight: 200,
           imageAlt: 'loading icon',
           background: '#ecf0ef',
-          color: '#30871a',
+          color: '#013a55',
           title: "Realizando la compra...",
           text: "Espera un momento",
-          timer: 3000,
+          timer: 4000,
           timerProgressBar: true,
           showConfirmButton: false
-        })
+        });
 
-        this.swal.successMessage('¡Compra realizada exitosamente!');
-
-      // this.generateInvoice()
+        setTimeout(() => {
+          this.swal.successMessage('¡Compra realizada exitosamente!');
+          this.generateInvoice();
+        }, 4000);
       }
     });
   }
@@ -109,6 +113,20 @@ export class BuyComponent {
 
     this.iva = this.total * 0.16;
     this.subtotal = this.total - (this.iva);
+  }
+
+  generateInvoice() {
+    this.invoiceService.generateInvoice(this.rfc).subscribe({
+      next: (v) => {
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1000);
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
   }
 
   // Product

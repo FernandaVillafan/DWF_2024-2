@@ -41,7 +41,7 @@ export class ProductByCategoryComponent {
         this.getProductsByCategory(category_id);
         this.getCategory(category_id);
       } else {
-        this.swal.errorMessage("¡Categoría inexistente!");
+        this.swal.errorMessage("¡Categoría Inexistente!");
       }
     });
   }
@@ -94,7 +94,7 @@ export class ProductByCategoryComponent {
     if (gtin) {
       this.router.navigate(['/product/', gtin]);
     } else {
-      this.swal.errorMessage("No hay información del producto para mostrar");
+      this.swal.errorMessage("¡No hay información del producto para mostrar!");
     }
   }
 }

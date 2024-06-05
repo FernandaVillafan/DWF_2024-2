@@ -23,6 +23,9 @@ declare var $: any; // JQuery
 
 export class ProductDetailsComponent {
 
+  isAdmin = false;
+  user: any;
+
   product: Product = new Product(); // product
   gtin: any | string = "";
   quantity: number = 1; // quantity of a product
@@ -68,13 +71,26 @@ export class ProductDetailsComponent {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem("user")) {
+
+      this.user = JSON.parse(localStorage.getItem("user")!);
+
+      if (this.user.rol == "ADMIN") {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    }
+    
     this.gtin = this.route.snapshot.paramMap.get('gtin');
     if (this.gtin) {
       this.getProduct();
       this.getActiveCategories();
-      this.getCustomerDetail();
+      if (!this.isAdmin) {
+        this.getCustomerDetail();
+      }
     } else {
-      this.swal.errorMessage("Producto inexistente");
+      this.swal.errorMessage("¡Producto Inexistente!");
     }
   }
 
@@ -239,6 +255,9 @@ export class ProductDetailsComponent {
           next: (v) => {
             this.swal.successMessage(v.body!.message);
             this.getCartItemCount();
+            setTimeout(() => {
+              window.location.reload();
+            }, 4000);
           },
           error: (e) => {
             console.error(e);

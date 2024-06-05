@@ -26,7 +26,7 @@ export class SwalMessages {
                 text: "Se agregó la imagen al producto exitosamente",
                 background: '#E8F8F8',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 4000
             });
         } else {
             Swal.fire({
@@ -36,7 +36,7 @@ export class SwalMessages {
                 text: message,
                 background: '#E8F8F8',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 4000
             });
         }
     }
@@ -51,7 +51,7 @@ export class SwalMessages {
                 text: "No se pudieron obtener los datos",
                 background: '#F8E8F8',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 4000
             });
         } else if (message == "FORBIDDEN") {
             Swal.fire({
@@ -61,7 +61,7 @@ export class SwalMessages {
                 text: "Inicia sesión para realizar esta acción",
                 background: '#F8E8F8',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 4000
             });
         } else {
             Swal.fire({
@@ -71,7 +71,7 @@ export class SwalMessages {
                 text: message,
                 background: '#F8E8F8',
                 showConfirmButton: false,
-                timer: 5000
+                timer: 4000
             });
         }
     }

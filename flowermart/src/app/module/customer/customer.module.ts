@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { CustomerBuyingsComponent } from './component/customer-buyings/customer-buyings.component';
 import { CustomerComponent } from './component/customer/customer.component';
 import { CustomerDetailsComponent } from './component/customer-details/customer-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { RegionComponent } from './component/region/region.component';
     RegionComponent,
     CustomerDetailsComponent,
     CustomerComponent,
+    CustomerBuyingsComponent,
   ],
   imports: [
     CommonModule,

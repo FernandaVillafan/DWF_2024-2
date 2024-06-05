@@ -4,22 +4,24 @@
 
     <!-- Buttons -->
 
-    <div class="row">
-        <div class="col">
-            <label for="uploadImage" class="btn btn-secondary">
-                <i class="ph ph-plus-circle"></i>
-                <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
-                Agregar imagen
-            </label>
+    @if (isAdmin) {
+        <div class="row">
+            <div class="col">
+                <label for="uploadImage" class="btn btn-secondary">
+                    <i class="ph ph-plus-circle"></i>
+                    <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
+                    Agregar imagen
+                </label>
+            </div>
+    
+            <div class="col">
+                <button type="button" class="btn btn-secondary" style="float: right" (click)="updateProduct()">
+                    <i class="ph ph-plus-circle"></i>
+                    Editar producto
+                </button>
+            </div>
         </div>
-
-        <div class="col">
-            <button type="button" class="btn btn-secondary" style="float: right" (click)="updateProduct()">
-                <i class="ph ph-plus-circle"></i>
-                Editar producto
-            </button>
-        </div>
-    </div>
+    }
 </div>
 
 <br>
@@ -72,10 +74,12 @@
 
                 <!-- Delete button visible only if there are images -->
 
-                <button *ngIf="images.length > 0" class="btn btn-secondary" type="button"
-                    style="margin: 2%; align-items: center;" (click)="deleteActiveImage()">
-                    Eliminar imagen
-                </button>
+                @if (isAdmin) {
+                    <button *ngIf="images.length > 0" class="btn btn-secondary" type="button"
+                        style="margin: 2%; align-items: center;" (click)="deleteActiveImage()">
+                        Eliminar imagen
+                    </button>
+                }
             </div>
         </div>
 
@@ -133,27 +137,29 @@
                                 </tr>
     
                                 <tr>
-                                    <td class="quantity-btns">
-                                        <button class="btn quantity-btn minus" (click)="decreaseQuantity()">
-                                            <i class="ph ph-minus"></i>
-                                        </button>
-
-                                        <input class="quantity-btn quantity-input" id="quantity-display" type="text" [(ngModel)]="quantity"/>
-
-                                        <button class="btn quantity-btn plus" (click)="increaseQuantity()">
-                                            <i class="ph ph-plus"></i>
-                                        </button>
-                                    </td> 
-
-                                    <td class="buy-container">
-                                        <button class="btn buy-btn" (click)="navigateToBuy()">
-                                            <i class="ph ph-credit-card"></i> Comprar ahora
-                                        </button>
-
-                                        <button class="btn buy-btn" (click)="addToCart()">
-                                            <i class="ph ph-shopping-cart"></i> Agregar al carrito
-                                        </button>
-                                    </td>
+                                    @if (!isAdmin && user.rol == "USER") {
+                                        <td class="quantity-btns">
+                                            <button class="btn quantity-btn minus" (click)="decreaseQuantity()">
+                                                <i class="ph ph-minus"></i>
+                                            </button>
+    
+                                            <input class="quantity-btn quantity-input" id="quantity-display" type="text" [(ngModel)]="quantity"/>
+    
+                                            <button class="btn quantity-btn plus" (click)="increaseQuantity()">
+                                                <i class="ph ph-plus"></i>
+                                            </button>
+                                        </td> 
+                                        
+                                        <td class="buy-container">
+                                            <button class="btn buy-btn" (click)="navigateToBuy()">
+                                                <i class="ph ph-credit-card"></i> Comprar ahora
+                                            </button>
+    
+                                            <button class="btn buy-btn" (click)="addToCart()">
+                                                <i class="ph ph-shopping-cart"></i> Agregar al carrito
+                                            </button>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
