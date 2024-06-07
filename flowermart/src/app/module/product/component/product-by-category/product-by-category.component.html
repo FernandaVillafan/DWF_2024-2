@@ -2,8 +2,17 @@
 
     <!-- Card header -->
 
-    <div class="card-header">
-        <h4>Productos de {{ category.category }}</h4>
+    <div class="card-header" style="text-align: center;">
+        <div class="col">
+            <button type="button" class="btn btn-secondary" style="float: left;" (click)="redirect(['/'])">
+                <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                Regresar
+            </button>
+        </div>
+
+        <div class="col">
+            <h4>Productos de {{ category.category }}</h4>
+        </div>
     </div>
 
     <!-- Card body -->

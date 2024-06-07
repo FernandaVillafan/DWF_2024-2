@@ -7,6 +7,7 @@ import { CustomerComponent } from '../../customer/component/customer/customer.co
 import { CustomerDetailsComponent } from '../../customer/component/customer-details/customer-details.component';
 import { HomeComponent } from '../../home/home.component';
 import { InvoiceComponent } from '../../invoice/component/invoice/invoice.component';
+import { InvoiceDetailsComponent } from '../../invoice/component/invoice-details/invoice-details.component';
 import { ProductByCategoryComponent } from '../../product/component/product-by-category/product-by-category.component';
 import { ProductComponent } from '../../product/component/product/product.component';
 import { ProductDetailsComponent } from '../../product/component/product-details/product-details.component';
@@ -22,6 +23,7 @@ export const AppLayoutRoutes: Routes = [
     { path: "customer/:rfc", component: CustomerDetailsComponent },
     { path: "customer/:rfc/buyings", component: CustomerBuyingsComponent },
     { path: 'invoice', component: InvoiceComponent },
+    { path: 'invoice/:id', component: InvoiceDetailsComponent },
     { path: 'product', component: ProductComponent },
     { path: 'product/:gtin', component: ProductDetailsComponent },
     { path: 'product/:gtin/buy', component: BuyComponent },

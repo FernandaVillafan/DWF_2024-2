@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
+declare var $: any; // JQuery
+
 @Component({
   selector: 'app-buy',
   templateUrl: './buy.component.html',
@@ -127,6 +129,10 @@ export class BuyComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+  }
+
+  redirect() {
+    this.router.navigate(["product/" + this.product.gtin]);
   }
 
   // Product

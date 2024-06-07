@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DtoInvoiceList } from '../../_dto/dto-invoice-list';
 import { InvoiceService } from '../../_service/invoice.service';
 import { PagingConfig } from '../../../commons/_models/paging-config';
+import { Router } from '@angular/router';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
@@ -21,6 +22,7 @@ export class InvoiceComponent {
 
   constructor(
     private invoiceService: InvoiceService,
+    private router: Router,
   ) { }
 
   currentPage: number  = 1;
@@ -49,5 +51,9 @@ export class InvoiceComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+  }
+
+  redirect(url: string[]) {
+    this.router.navigate(url);
   }
 }

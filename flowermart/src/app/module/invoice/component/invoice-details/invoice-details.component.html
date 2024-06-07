@@ -1,0 +1,185 @@
+<!-- Invoice Details -->
+
+<div class="row">
+    <div class="col">
+        <button type="button" class="btn btn-secondary" style="float: left;" (click)="redirect()">
+            <i class="ph ph-arrow-circle-left icon-text-button"></i>
+            Regresar
+        </button>
+    </div>
+
+    <div class="col-md mb-3">
+        <button type="button" class="btn btn-secondary" style="float: right;" (click)="downloadInvoice()">
+            <i class="ph ph-file-arrow-down"></i>
+            Descargar
+        </button>
+    </div>
+</div>
+
+<div class="card principal">
+
+    <!-- Invoice Data -->
+
+    <div class="row section">
+        <div class="card content col-md-2" style="padding-top: 13px;"> 
+            <img src="assets/images/favicon.png" alt="...">
+        </div>
+
+        <div class="card content col-md-3">
+            <h6 class="mt-1" style="font-style: italic;">DOMICILIO FISCAL</h6>
+            <div class="invoice-text">Nueva Flower Mart de México, S. de R. L. de C.V.</div>
+            <br>
+            <div class="invoice-text">NEXTENGO 78</div>
+            <div class="invoice-text">Col. SANTA CRUZ ACAYUCAN</div>
+            <div class="invoice-text">Del. AZCAPOTZALCO</div>
+            <div class="invoice-text">C.P. 02770</div>
+            <div class="invoice-text">CIUDAD DE MEXICO, MEXICO</div>
+            <div class="invoice-text">NFM9709244F4</div>
+        </div>
+
+        <div class="card content col-md-4">
+            <h6 class="mt-1" style="font-style: italic;">EXPEDIDO EN</h6>
+            <div class="invoice-text">DOMICILIO ESTABLECIMIENTO</div>
+            <div class="invoice-text">AZCAPOTZALCO</div>
+            <div class="invoice-text">NEXTENGO 78</div>
+            <div class="invoice-text">SANTA CRUZ ACAYUCAN</div>
+            <div class="invoice-text">CIUDAD DE MEXICO, MEXICO</div>
+            <div class="invoice-text">C.P. 02770</div>
+            <br><br>
+            <div class="invoice-text">RÉGIMEN FISCAL: Régimen de Consolidación</div>
+        </div>
+
+        <div class="card content col-md">
+            <div class="row mt-2">
+                <div class="card content col-md-6">
+                    <div class="card-header text-center" style="font-weight:500;">FECHA</div>
+                    <div class="card body text-center">{{ invoice.created_at | date:'dd-MM-yyyy' }}</div>
+                </div>
+
+                <div class="card content col-md-6">
+                    <div class="card-header text-center" style="font-weight: 500;">FACTURA</div>
+                    <div class="card body text-center">{{ randStr }}</div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="card content col-md">
+                    <div class="card-header text-center" style="font-weight:500;">FOLIO FISCAL</div>
+                    <div class="card body text-center">A8C2DF43-2F17-4313-9FFE</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Data -->
+
+    <div class="row section">
+        <div class="card content">
+            <div class="card-header text-center" style="font-weight:500;">CLIENTE</div>
+
+            <div class="card body">
+                <div class="row col-md">
+                    <div class="col-md-6 text-center" style="padding-top: 8px;">NOMBRE O RAZÓN SOCIAL: {{ customer.name + " " + customer.surname }}</div>
+                    <div class="col-md-6 text-center" style="padding-top: 8px;">DOMICILIO: {{ customer.address }}</div>
+                    <br><br>
+                    <div class="col-md-6 text-center" style="padding-bottom: 8px;">
+                        R.F.C. CLIENTE: {{ customer.rfc }} 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Data -->
+
+    <div class="row section">
+        <div class="card content col-md">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="border-radius: 4px 0px 0px 0px;">Código</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Valor Unitario</th>
+                            <th class="text-center" style="border-radius: 0px 4px 0px 0px;">Importe</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-body">
+                        @for (item of invoice.items; track $index) {
+                            <tr>
+                                <td class="text-center">{{ item.gtin }}</td>
+                                <td class="text-center">{{ item.quantity }}</td>
+                                <td class="text-center">{{ products[item.gtin].product }}</td>
+                                <td class="text-center">{{ item.unit_price | currency: 'USD' }}</td>
+                                <td class="text-center">{{ item.total | currency: 'USD' }}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="card content col-md">
+            <br><br><br>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="card content col-md">
+            <div class="card-header text-center" style="font-weight:500;">TOTAL</div>
+
+            <div class="card body">
+                <div class="row text-center mt-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="row-md">SUBTOTAL</div>
+                        <div class="row-md">{{ invoice.subtotal | currency: 'USD' }}</div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="row-md">IVA 16%</div>
+                        <div class="row-md">{{ invoice.taxes | currency: 'USD' }}</div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="row-md">TOTAL</div>
+                        <div class="row-md">{{ invoice.total | currency: 'USD' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row section">
+            <div class="card content col-md-3 mt-4">
+                <img src="assets/images/qrcode.png" alt="">
+            </div>
+
+            <div class="card content col-md">
+                <div class="card-header text-center" style="font-weight:500;">SELLO DIGITAL DEL CFDI</div>
+                <br>
+
+                <div class="row">
+                    <div>lPR9CZq8nBXIoCxTHVvyRSkqsc91B4OEV+rsVLbLUSchyDjh2mkKOaIhpPCiqZ0PuTTjlQX7VrwocNTqlcLBvEEIu65wnOsZfCqVd4INL9uT8hP6CGh4xJkdpeCroC3CS8kb2i702Z
+                    IFs9SxU7AWPVgQFvl2In4xTKN6BDfCdMOeDzatitvy4yjkDP4YrwVqfecWfbbi44EPemFFSfIK5VlJeHa0Db2x0Fig6pYdE33u6+uEzon/6AL9hURdgoV/7XId+Zw5cZvGSkOcRqmN6
+                    mwjR9g6AyDbWEarIAkc8S82khUq3lrPAk3czhJ5Bnh4EJ+h1pYTn+hLvPqtP021+A==</div>
+                </div>
+                <br>
+
+                <div class="card-header text-center" style="border-radius: 4px 4px 0px 0px; font-weight:500;">SELLO DEL SAT</div>
+                <br>
+
+                <div class="row">
+                    <div>SV73LzHTXycDfF/8p4+AwWqA59Q2uCCppMKCUO1eG+GAoi/CVEKnQ/ayR+Ifdi4LmPHyaoLqBhzrcwtH+ZzaZXaz6iTNjgOhQWWOLeYATBFs9P93Sk/1AxRC1iBsq1Oci8d9flK
+                    Y9N+arCTdeqFVt8uZXcz1fj5gvB8Hhrhvi/i4ttnWKCbvd+4Mf+XO4DholRPWvv5Uxo04IK4zxgwFyU+oh+nun2nieNkKsZ/rMEFaCbwWLcxkrHTC6fPVd3QoEG9C0nU9awaFt/mvHx
+                    kI1G8AS246JFSYX0OMpWLOUhjnqTOWiP/grFljds66qkfvG4dqaRSTJm+6Zphk1HNzoA==</div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

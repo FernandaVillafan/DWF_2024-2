@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { PagingConfig } from '../../../commons/_models/paging-config';
 import { Region } from '../../_model/region/region';
 import { RegionService } from '../../_service/region.service';
+import { Router } from '@angular/router';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
@@ -34,6 +35,7 @@ export class RegionComponent {
   constructor(
     private regionService: RegionService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   currentPage: number  = 1;
@@ -165,6 +167,10 @@ export class RegionComponent {
         });
       }
     });
+  }
+
+  redirect(url: string[]) {
+    this.router.navigate(url);
   }
 
   showModalForm() {

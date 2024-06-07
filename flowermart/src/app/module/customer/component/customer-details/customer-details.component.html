@@ -6,8 +6,15 @@
 
     @if (isAdmin) {
         <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-secondary" style="float: left;" (click)="redirect(['customer'])">
+                    <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                    Regresar
+                </button>
+            </div>
+
             <div class="col">
-                <label for="uploadImage" class="btn btn-secondary">
+                <label for="uploadImage" class="btn btn-secondary" style="float: right; margin-right: 270px;">
                     <i class="ph ph-plus-circle"></i>
                     <input type="file" (change)="fileChangeHandler($event)" id="uploadImage" style="display:none">
                     Editar imagen
@@ -21,13 +28,21 @@
                 </button>
             </div>
         </div>
+        <br>
     }
 </div>
 
-<br>
-
 <div class="card-body">
     <div class="row">
+        @if (!isAdmin) {
+            <div class="col-md-12">
+                <button type="button" class="btn btn-secondary" style="float: left;" (click)="redirect(['/'])">
+                    <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                    Regresar
+                </button>
+            </div>
+            <br><br>
+        }
 
         <!-- Customer Image -->
 

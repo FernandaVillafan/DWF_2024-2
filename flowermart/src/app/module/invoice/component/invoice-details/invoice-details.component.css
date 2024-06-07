@@ -1,0 +1,41 @@
+tbody {
+    border-width: 1px;
+}
+
+td, thead {
+    border: none;
+}
+
+thead th {
+    background-color: #0fa7b4;
+    color: white;
+}
+
+.card.body {
+    border-radius: 0;
+    border-top: none;
+}
+
+.card.content {
+    border: none;
+    margin-top: 5px;
+}
+
+.card-header {
+    background-color: #02728d;
+    border: none;
+    color: white;
+}
+
+.card.principal {
+    border-color: #0fa7b4;
+    border-width: 3px;
+}
+
+.invoice-text {
+    font-size: small;
+}
+
+.section {
+    margin: 10px;
+}

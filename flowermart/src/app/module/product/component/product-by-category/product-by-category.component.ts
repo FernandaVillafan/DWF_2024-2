@@ -97,4 +97,8 @@ export class ProductByCategoryComponent {
       this.swal.errorMessage("¡No hay información del producto para mostrar!");
     }
   }
+
+  redirect(url: string[]) {
+    this.router.navigate(url);
+  }
 }

@@ -143,6 +143,10 @@ export class ProductComponent {
     this.router.navigate(['product/' + gtin]);
   }
 
+  redirect(url: string[]) {
+    this.router.navigate(url);
+  }
+
   showModalForm() {
     $("#modalForm").modal("show");
     this.form.reset();

@@ -142,6 +142,10 @@ export class CustomerComponent {
     this.router.navigate(['customer/' + rfc]);
   }
 
+  redirect(url: string[]) {
+    this.router.navigate(url);
+  }
+
   showModalForm() {
     $("#modalForm").modal("show");
     this.form.reset();

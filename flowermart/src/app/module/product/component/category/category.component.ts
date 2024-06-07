@@ -3,6 +3,7 @@ import { CategoryService } from '../../_service/category.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PagingConfig } from '../../../commons/_models/paging-config';
+import { Router } from '@angular/router';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
 declare var $: any; // JQuery
@@ -33,7 +34,8 @@ export class CategoryComponent {
 
   constructor(
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   currentPage: number  = 1;
@@ -163,6 +165,10 @@ export class CategoryComponent {
         });
       }
     });
+  }
+
+  redirect(url: string[]) {
+    this.router.navigate(url);
   }
 
   showModalForm() {

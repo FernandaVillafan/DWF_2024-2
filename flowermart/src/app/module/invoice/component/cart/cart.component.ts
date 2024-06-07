@@ -9,6 +9,8 @@ import { ProductImage } from '../../../product/_model/product/product-image';
 import { Router } from '@angular/router';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
+declare var $: any; // JQuery
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -159,6 +161,10 @@ export class CartComponent {
     } else {
       console.error('No hay productos seleccionados o los datos del cliente son nulos o no válidos');
     }
+  }
+
+  redirect(url: string[]) {
+    this.router.navigate(url);
   }
 
   // Customer 
