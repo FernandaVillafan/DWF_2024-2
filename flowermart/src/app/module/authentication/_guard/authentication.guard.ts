@@ -5,10 +5,9 @@ import { inject } from '@angular/core';
 export const authenticationGuard: CanActivateFn = (route, state) => {
 
   let isLogged : boolean = inject(AuthenticationService).isUserLoggedIn();
-  console.log(isLogged);
 
   if (!isLogged) {
-    console.log('Redirigiendo a inicio de sesion');
+    console.log('Redirigiendo a Inicio de Sesión');
     inject(Router).navigate(['login']);
     return false;
   }

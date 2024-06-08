@@ -71,8 +71,11 @@
                             @for (product of cart | paginate: pageConfig; track product; let i = $index) {
                                 <tr>
                                     <td class="tr-data">
-                                        <img [src]="product.image !== '' ? product.image : 'assets/images/default-image.png'"
-                                            class="d-block w-100" alt="...">
+                                        @if (product.image !== 'data:image/png;base64,') {
+                                            <img src="{{ product.image }}" class="d-block w-100" alt="...">
+                                        } @else {
+                                            <img src="assets/images/default-image.png" class="d-block w-100" alt="...">
+                                        }
                                     </td>
                                     <td class="tr-data">{{ product.product.product }}</td>
                                     <td class="tr-data">{{ product.product.price | currency : "USD" }}</td>

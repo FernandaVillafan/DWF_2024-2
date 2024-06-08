@@ -81,4 +81,8 @@ export class LoginComponent implements OnInit {
   get fg() {
     return this.loginForm.controls;
   }
+
+  clearForm() {
+    this.loginForm.reset();
+  }
 }

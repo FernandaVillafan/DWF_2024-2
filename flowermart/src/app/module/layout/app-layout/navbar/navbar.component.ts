@@ -2,9 +2,11 @@ import { AuthenticationService } from '../../../authentication/_service/authenti
 import { Category } from '../../../product/_model/category/category';
 import { CategoryService } from '../../../product/_service/category.service';
 import { CartService } from '../../../invoice/_service/cart.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Customer } from '../../../customer/_model/customer/customer';
 import { CustomerService } from '../../../customer/_service/customer.service';
+import { LoginComponent } from '../../../authentication/login/login.component';
+import { RegisterComponent } from '../../../authentication/register/register.component';
 import { Router } from '@angular/router';
 import { SwalMessages } from '../../../commons/_dto/swal-messages';
 
@@ -29,6 +31,9 @@ export class NavbarComponent {
   cartItemCount: number = 0;
 
   swal: SwalMessages = new SwalMessages(); // Swal messages
+
+  @ViewChild(RegisterComponent) registerComponent!: RegisterComponent;
+  @ViewChild(LoginComponent) loginComponent! : LoginComponent;
 
   constructor(
     private categoryService: CategoryService,
@@ -57,13 +62,22 @@ export class NavbarComponent {
       } else {
         this.userProfileImage = 'assets/images/user-logo.png';
       }
+
+      this.getCategories();
+
+      this.cartService.getCartItemCount().subscribe(count => {
+        this.cartItemCount = count;
+      });
     }
-
-    this.getCategories();
-
-    this.cartService.getCartItemCount().subscribe(count => {
-      this.cartItemCount = count;
-    });
+  }
+  
+  logout() {
+    this.servicioAutenticacion.logOut();
+    this.loggedIn = false;
+    this.isAdmin = false;
+    this.customer = new Customer();
+    this.userProfileImage = '';
+    this.router.navigate(['/']);
   }
 
   getCategories() {
@@ -77,21 +91,15 @@ export class NavbarComponent {
       }
     });
   }
-  
-  logout() {
-    this.servicioAutenticacion.logOut();
-    this.loggedIn = false;
-    this.isAdmin = false;
-    this.customer = new Customer();
-    this.userProfileImage = '';
-    this.router.navigate(['/']);
-  }
 
   getCustomerDetail() {
     this.customerService.getCustomerDetail().subscribe({
       next: (v) => {
         this.customer = v.body!;
         this.userProfileImage = this.customer.image?.image;
+        if (this.userProfileImage == '') {
+          this.userProfileImage = 'assets/images/user-logo.png';
+        }
       },
       error: (e) => {
         console.log(e);
@@ -101,10 +109,16 @@ export class NavbarComponent {
   }
 
   showLoginModal() {
+    $("#loginModal").on("shown.bs.modal", () => {
+      this.loginComponent.clearForm();
+    });
     $("#loginModal").modal("show");
   }
   
   showRegisterModal() {
+    $("#registerModal").on("shown.bs.modal", () => {
+      this.registerComponent.clearForm();
+    });
     $("#registerModal").modal("show");
   }
 }

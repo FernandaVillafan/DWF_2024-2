@@ -21,7 +21,6 @@
                             <span class="input-group-text"><fa-icon [icon]="surnameIcon"></fa-icon></span>
                         </div>
 
-
                         <input type="text" class="form-control" name="surname" placeholder="Apellido(s)"
                             [(ngModel)]="usuario.surname" required>
                     </div>
@@ -40,7 +39,7 @@
                             <span class="input-group-text"><fa-icon [icon]="mailIcon"></fa-icon></span>
                         </div>
 
-                        <input type="mail" class="form-control" name="mail" placeholder="Email"
+                        <input type="mail" class="form-control" name="mail" placeholder="Correo electrónico"
                             [(ngModel)]="usuario.mail" required>
                     </div>
 
@@ -58,8 +57,14 @@
                             <span class="input-group-text"><fa-icon [icon]="regionIcon"></fa-icon></span>
                         </div>
 
-                        <input type="number" class="form-control" name="region" placeholder="Region"
-                            [(ngModel)]="usuario.region_id" required>
+                        <select class="form-select" name="region_id" id="region_id" [(ngModel)]="usuario.region_id" #regionSelect required>
+                            <option [ngValue]="0" disabled selected>Región</option>
+                            <ng-container *ngFor="let region of regions">
+                                <option *ngIf="region.status == 1" [ngValue]="region.region_id">
+                                    {{ region.region }}
+                                </option>
+                            </ng-container>
+                        </select>
                     </div>
 
                     <div class="input-group mb-3">
