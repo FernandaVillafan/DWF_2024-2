@@ -7,7 +7,7 @@ Desarrollo Web Front-End
 </h1>
 
 <p align="center">
-  <img src="Logo.png" style="width: 60%;"/>
+  <img src="Logo.png" style="width: 25%;"/>
 </p>
 
 ## Desarrolladores
