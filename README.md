@@ -52,6 +52,6 @@ En caso de encontrarse con el error:
   <img src="error.png" style="width: 60%;"/>
 </p>
 
-Abrir el archivo mencionado: `node_modules/ngx-photo-editor/photo-editor.css`.
+Abrir el archivo mencionado: `DWF_2024-2/flowermart/node_modules/ngx-photo-editor/photo-editor.css`.
 
 Cambiar la primera línea por: `@import "cropperjs/dist/cropper.css";`.
